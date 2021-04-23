@@ -1,4 +1,5 @@
 <head>
+    <link rel="icon" type="image/png" href="<?php echo base_url('assets/img/logoPeke.png'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/sb-admin-2.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css'); ?>">
@@ -13,16 +14,14 @@
         <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <br>
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('about'); ?>">
-                <img src="<?php echo base_url('assets/img/10.png') ?>" style="width: 80%;">
+                <img src="<?php echo base_url('assets/img/logo1_transparent.png') ?>" style="width: 100%;">
                 <!--<div class="sidebar-brand-text mx-3"> ACCESS&RESOURCE
                     <sup>3</sup>
                 </div>-->
             </a>
-            <br>
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
+            <!--<hr class="sidebar-divider my-0">-->
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
