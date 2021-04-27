@@ -49,18 +49,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'prova_controller/home';
+$route['default_controller'] = 'homeabout_controller/home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 /*URL |_pagina/(algo)_| |(:Expreg)(:any)(:num)| ==> controlador (pages) funcio (view) parametre ($1) */
 
-$route['home'] = "prova_controller/home"; 
-$route['about'] = "prova_controller/about"; 
+$route['home'] = "homeabout_controller/home"; 
+$route['about'] = "homeabout_controller/about"; 
 
-$route['login'] = "prova_controller/login";
-$route['login/settings'] = "prova_controller/settings";
-$route['login/registre'] = "prova_controller/registre"; 
+$route['login'] = "logins_controller/login";
+$route['login/registre'] = "logins_controller/registre"; 
+$route['login/logout'] = "logins_controller/logout"; 
+$route['login/settings'] = "logins_controller/settings";
+
 
 $route['tree/category'] = 'tree/treecat_controller/index'; 
 

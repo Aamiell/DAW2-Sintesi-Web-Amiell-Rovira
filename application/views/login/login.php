@@ -31,16 +31,16 @@ include "navbar-public.php"; ?>
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                         </div>
-                                        <form class="user">
+                                        <form class="user" action="<?php echo base_url('/login') ?>" method="POST">
                                             <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username...">
+                                                <input type="text" class="form-control form-control-user" name="user" id="exampleInputUser" aria-describedby="emailHelp" placeholder="Username...">
                                             </div>
                                             <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password...">
+                                                <input type="password" class="form-control form-control-user" name="pass" id="exampleInputPassword" placeholder="Password...">
                                             </div>
-                                            <a href="index.html" class="btn btn-success btn-user btn-block">
+                                            <button type="submit" class="btn btn-success btn-user btn-block">
                                                 Login
-                                            </a>
+                                            </button>
                                             <hr>
                                             <hr>
                                             <a href="<?php echo base_url('login/registre'); ?>" class="btn btn-primary btn-user btn-block">

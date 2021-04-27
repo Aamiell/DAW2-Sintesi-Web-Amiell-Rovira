@@ -15,13 +15,10 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('about'); ?>">
-                <img src="<?php echo base_url('assets/img/logo1_transparent.png') ?>" style="width: 100%;">
-                <!--<div class="sidebar-brand-text mx-3"> ACCESS&RESOURCE
-                    <sup>3</sup>
-                </div>-->
+                <img src="<?php echo base_url('assets/img/logo1_transparent.png') ?>" style="width: 65%;">
             </a>
             <!-- Divider -->
-            <!--<hr class="sidebar-divider my-0">-->
+            <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">

@@ -12,43 +12,41 @@ include "navbar-public.php"; ?>
 
     <!-- Content Row -->
     <div class="row">
-    
+
         <div class="container">
 
-            <!-- Outer Row -->
-            <div class="row justify-content-center">
-
-                <div class="col-xl-10 col-lg-12 col-md-9 position-absolute top-50 start-50 translate-middle">
-
-                    <div class="card o-hidden border-0 shadow-lg my-5">
-                        <div class="card-body p-0 ">
-                            <!-- Nested Row within Card Body -->
-                            <div class="row">
-
-                                <div class="col-lg-6 d-none d-lg-block bg-register-image"></div>
-                                <div class="col-lg-6">
-                                    <div class="p-5">
-                                        <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">Create Account!</h1>
-                                        </div>
-                                        <form class="user">
-                                            <div class="form-group">
-                                                <input type="username" class="form-control form-control-user" id="exampleInputUsername"  placeholder="Username...">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email...">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password...">
-                                            </div>
-                                            <a href="<?php echo base_url('login'); ?>" class="btn btn-primary btn-user btn-block">
-                                                Registrar
-                                            </a>
-                                            <hr>
-                                        </form>
-                                        <hr>
-                                    </div>
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                        <div class="col-lg-7">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Create a Account!</h1>
                                 </div>
+                                <form class="user" action="<?php echo base_url('login/registre') ?>" method="POST">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" name="firstname" id="exampleFirstName" placeholder="First Name...">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user" name="lastname" id="exampleLastName" placeholder="Last Name...">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="user" id="exampleInputUser" placeholder="Username...">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user" name="email" id="exampleInputEmail" placeholder="Email Address...">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user" name="pass" id="exampleInputPass" placeholder="Password...">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        Registrar
+                                    </button>
+                                    <hr>
                             </div>
                         </div>
                     </div>
@@ -56,9 +54,7 @@ include "navbar-public.php"; ?>
             </div>
         </div>
     </div>
-
-</div>
-<!-- /.container-fluid -->
+    <!-- /.container-fluid -->
 
 </div>
 <!-- End of Main Content -->
