@@ -13,13 +13,8 @@
         <ul class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-user-friends"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3"> AMIELL&ROVIR
-                    <!--<sup>3</sup>-->
-                </div>
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?php echo base_url('about'); ?>">
+                <img src="<?php echo base_url('assets/img/logo1_transparent.png') ?>" style="width: 65%;">
             </a>
 
             <!-- Divider -->
