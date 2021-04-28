@@ -55,13 +55,14 @@ $route['translate_uri_dashes'] = FALSE;
 
 /*URL |_pagina/(algo)_| |(:Expreg)(:any)(:num)| ==> controlador (pages) funcio (view) parametre ($1) */
 
-$route['home'] = "homeabout_controller/home"; 
-$route['about'] = "homeabout_controller/about"; 
+$route['home'] = "home_about_controller/home"; 
+$route['about'] = "home_about_controller/about"; 
 
 $route['login'] = "logins_controller/login";
 $route['login/registre'] = "logins_controller/registre"; 
 $route['login/logout'] = "logins_controller/logout"; 
 $route['login/settings'] = "logins_controller/settings";
+$route['login/profile'] = "logins_controller/profile";
 
 
 $route['tree/category'] = 'tree/treecat_controller/index'; 

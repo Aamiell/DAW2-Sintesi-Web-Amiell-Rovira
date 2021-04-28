@@ -11203,6 +11203,12 @@ a:focus {
     background-size: cover;
 }
 
+.bg-profile-image {
+    background-image: url("../img/formprofile.jpg");
+    background-position: center;
+    background-size: cover;
+}
+
 .bg-register-image {
     background: url("../img/registre.jpg");
     background-position: center;

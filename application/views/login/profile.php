@@ -1,5 +1,5 @@
 <?php
-include "navbar-public.php"; ?>
+include "navbar-private.php"; ?>
 <!-- End of Topbar -->
 
 <!-- Begin Page Content -->
@@ -19,13 +19,13 @@ include "navbar-public.php"; ?>
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                        <div class="col-lg-5 d-none d-lg-block bg-profile-image"></div>
                         <div class="col-lg-7">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Create a Account!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Profile Information!</h1>
                                 </div>
-                                <form class="user" action="<?php echo base_url('login/registre') ?>" method="POST">
+                                <form class="user">
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
                                             <input type="text" class="form-control form-control-user" name="firstname" id="exampleFirstName" placeholder="First Name...">
@@ -43,8 +43,7 @@ include "navbar-public.php"; ?>
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user" name="pass" id="exampleInputPass" placeholder="Password...">
                                     </div>
-                                    <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar">
-                                </form>
+                                    <hr>
                                     <hr>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 <?php
-class Prova_controller extends CI_Controller
+class Home_about_controller extends CI_Controller
 {
 
     public function __construct()

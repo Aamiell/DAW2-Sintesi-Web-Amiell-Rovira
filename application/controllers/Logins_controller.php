@@ -29,25 +29,35 @@ class Logins_controller extends CI_Controller
 
     public function registre()
     {
+        
+        if ($this->input->post('firstname')!=null){
+
+            $first_name= $this->input->post('firstname');
+            $last_name= $this->input->post('lastname');
+            $username = $this->input->post('user');
+            $password = $this->input->post('pass');
+            $email = $this->input->post('email');
+            
+            $additional_data = array(
+                'first_name' =>$first_name,
+                'last_name' => $last_name
+            );
+            
+            $this->ion_auth->register($username, $password, $email, $additional_data);
+            $this->load->view('login/login');
+        }
+
         $this->load->view('login/registre');
-
-        $first_name= $this->input->post('firstname');
-        $last_name= $this->input->post('lastname');
-        $username = $this->input->post('user');
-        $password = $this->input->post('pass');
-        $email = $this->input->post('email');
-
-        $additional_data = array(
-                    'first_name' =>$first_name,
-                    'last_name' => $last_name
-                    );
-
-        $this->ion_auth->register($username, $password, $email, $additional_data);
     }
 
     public function settings()
     {
         $this->load->view('login/settings');
+    }
+
+    public function profile()
+    {
+        $this->load->view('login/profile');
     }
     
     public function logout()
