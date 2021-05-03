@@ -22,8 +22,8 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo base_url('login/inici'); ?>">
-                    <i class="fas fa-sign-in-alt"></i>
+                <a class="nav-link" href="<?php echo base_url('login'); ?>">
+                    <i class="fas fa-home"></i>
                     <span>HOME</span></a>
             </li>
 
@@ -162,10 +162,10 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                <?php 
-                                $user= $this->ion_auth->user()->row();
+                                    <?php
+                                    $user = $this->ion_auth->user()->row();
                                     echo $user->username;
-                                ?></span>
+                                    ?></span>
                                 <img class="img-profile rounded-circle" src="<?php echo base_url('assets/img/undraw_profile.svg'); ?>">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -175,6 +175,9 @@
                                 </a>
                                 <a class="dropdown-item" href="<?php echo base_url('login/settings'); ?>">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
+                                </a>
+                                <a class="dropdown-item" href="<?php echo base_url('login/changepass'); ?>">
+                                    <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i> Canviar Contrasenya
                                 </a>
                                 <!--<a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Activity Log
@@ -186,6 +189,9 @@
                             </div>
                         </li>
                     </ul>
+
+
+
                     <!-- Logout Modal-->
                     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -198,7 +204,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                    <a class="btn btn-danger" href="<?php echo base_url('login'); ?>">Logout</a>
+                                    <a class="btn btn-danger" href="<?php echo base_url('login/logout'); ?>">Logout</a>
                                 </div>
                             </div>
                         </div>

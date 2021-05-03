@@ -23,6 +23,7 @@ class Home_about_controller extends CI_Controller
 
     public function about()
     {
+        $this->load->view('templates/footer');
         $this->load->view('login/navbar-public');
         $this->load->view('pages/about');
     }

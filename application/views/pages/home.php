@@ -10,44 +10,33 @@
 
     <!-- Content Row -->
     <div class="row">
-
         <div class="container">
-
-            <!-- Outer Row -->
-            <div class="row justify-content-center">
-
-                <div class="col-xl-10 col-lg-12 col-md-9 position-absolute top-50 start-50 translate-middle">
-
-                    <!-- Nested Row within Card Body -->
-                    <div class="row">
-
-                        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" style="width:74%; height: 10%;">
-                            <div class="carousel-inner">
-                                <div class="carousel-item active">
-                                    <img src="<?php echo base_url('assets/img/pro.jpg') ?>" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="<?php echo base_url('assets/img/cv.jpg') ?>" class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="<?php echo base_url('assets/img/logo2.jpg') ?>" class="d-block w-100" alt="...">
-                                </div>
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" style="width:74%; height: 10%;">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="<?php echo base_url('assets/img/pro.jpg') ?>" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="<?php echo base_url('assets/img/cv.jpg') ?>" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="<?php echo base_url('assets/img/logo2.jpg') ?>" class="d-block w-100" alt="...">
                         </div>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 <!-- /.container-fluid -->
 
@@ -55,7 +44,7 @@
 <!-- End of Main Content -->
 
 <!-- Footer -->
-<footer class="sticky-footer bg-white">
+<footer class="sticky-footer bg-white ">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
             <span>Copyright &copy; Access&Resource 2021</span>

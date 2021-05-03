@@ -23,7 +23,7 @@ include "navbar-public.php"; ?>
                         <div class="col-lg-7">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Create a Account!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Crear conte d'usuari</h1>
                                 </div>
                                 <form class="user" action="<?php echo base_url('login/registre') ?>" method="POST">
                                     <div class="form-group row">
@@ -43,9 +43,17 @@ include "navbar-public.php"; ?>
                                     <div class="form-group">
                                         <input type="password" class="form-control form-control-user" name="pass" id="exampleInputPass" placeholder="Password...">
                                     </div>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-checkbox small">
+                                            <input type="checkbox" class="custom-control-input" name="casella" id="casella">
+                                            <label class="custom-control-label" for="customCheck">Aceptes els termens de privacitat <a href="<?php echo base_url('assets/docs/PoliticaDePrivacidadAccess&Resource.pdf') ?>" class="stretched-link">ACCESS&RESOURCE</a></label>
+                                        </div>
+                                    </div>
                                     <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar">
                                 </form>
-                                    <hr>
+                                <hr>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo validation_errors(); ?></div>
                             </div>
                         </div>
                     </div>

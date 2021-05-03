@@ -1,6 +1,6 @@
 <?php
-include "navbar-private.php"
-?>
+include "navbar-private.php"; ?>
+<!-- End of Topbar -->
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -12,43 +12,37 @@ include "navbar-private.php"
 
     <!-- Content Row -->
     <div class="row">
-
         <div class="container">
-
-            <!-- Outer Row -->
-            <div class="row justify-content-center">
-
-                <div class="col-xl-10 col-lg-12 col-md-9 position-absolute top-50 start-50 translate-middle">
-
-                    <div class="card o-hidden border-0 shadow-lg my-5">
-                        <div class="card-body p-0 ">
-                            <!-- Nested Row within Card Body -->
-                            <div class="row">
-
-                                <div class="col-lg-6 d-none d-lg-block bg-actulogin-image"></div>
-                                <div class="col-lg-6">
-                                    <div class="p-5">
-                                        <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">Update Profile Information!</h1>
-                                        </div>
-                                        <form class="user">
-                                            <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" id="exampleInputUsername" aria-describedby="emailHelp" placeholder="Username...">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password...">
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Email...">
-                                            </div>
-                                            <a href="<?php echo base_url('login/inici'); ?>" class="btn btn-success btn-user btn-block">
-                                                Actualizar
-                                            </a>
-                                            <hr>
-                                        </form>
-                                        <hr>
-                                    </div>
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-5 d-none d-lg-block bg-actulogin-image"></div>
+                        <div class="col-lg-7">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Actualitzar Dades Usuari</h1>
                                 </div>
+                                <form class="user" action="<?php echo base_url('login/settings') ?>" method="POST">
+                                    <div class="form-group row">
+                                    <input type="hidden" name="id" value="<?php echo $user->id; ?>">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" name="firstname" id="exampleFirstName" value="<?php echo $user->first_name; ?>">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user" name="lastname" id="exampleLastName" value="<?php echo $user->last_name; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" name="user" id="exampleInputUser" value="<?php echo $user->username; ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user" name="email" id="exampleInputEmail" value="<?php echo $user->email; ?>">
+                                    </div>
+                                    <hr>
+                                    <input type="submit" class="btn btn-primary btn-user btn-block" value="Actulitzar">
+                                </form>
+                                <hr>
                             </div>
                         </div>
                     </div>
@@ -56,7 +50,6 @@ include "navbar-private.php"
             </div>
         </div>
     </div>
-
 </div>
 <!-- /.container-fluid -->
 
@@ -64,7 +57,7 @@ include "navbar-private.php"
 <!-- End of Main Content -->
 
 <!-- Footer -->
-<footer class="sticky-footer bg-white">
+<footer class="sticky-footer bg-white ">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
             <span>Copyright &copy; Access&Resource 2021</span>

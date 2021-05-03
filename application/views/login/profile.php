@@ -12,7 +12,6 @@ include "navbar-private.php"; ?>
 
     <!-- Content Row -->
     <div class="row">
-
         <div class="container">
 
             <div class="card o-hidden border-0 shadow-lg my-5">
@@ -28,23 +27,23 @@ include "navbar-private.php"; ?>
                                 <form class="user">
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="text" class="form-control form-control-user" name="firstname" id="exampleFirstName" placeholder="First Name...">
+                                            <div style="border: 2px solid grey; border-radius: 25px; padding: 10px; "><b>Nom: </b><?php echo $user->first_name; ?></div>
                                         </div>
                                         <div class="col-sm-6">
-                                            <input type="text" class="form-control form-control-user" name="lastname" id="exampleLastName" placeholder="Last Name...">
+                                            <div style="border: 2px solid grey; border-radius: 25px; padding: 10px; "><b>Cognom: </b><?php echo $user->last_name; ?></div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="user" id="exampleInputUser" placeholder="Username...">
+                                        <div style="border: 2px solid grey; border-radius: 25px; padding: 10px; "><b>Usuari: </b><?php echo $user->username; ?></div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" name="email" id="exampleInputEmail" placeholder="Email Address...">
+                                        <div style="border: 2px solid grey; border-radius: 25px; padding: 10px; "><b>Email: </b><?php echo $user->email; ?></div>
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" name="pass" id="exampleInputPass" placeholder="Password...">
+                                        <div style="border: 2px solid grey; border-radius: 25px; padding: 10px; "><b>Contrasenya: </b><?php echo $user->password; ?></div>
                                     </div>
-                                    <hr>
-                                    <hr>
+                                    <form>
+                                        
                             </div>
                         </div>
                     </div>
@@ -52,13 +51,14 @@ include "navbar-private.php"; ?>
             </div>
         </div>
     </div>
-    <!-- /.container-fluid -->
+</div>
+<!-- /.container-fluid -->
 
 </div>
 <!-- End of Main Content -->
 
 <!-- Footer -->
-<footer class="sticky-footer bg-white">
+<footer class="sticky-footer bg-white ">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
             <span>Copyright &copy; Access&Resource 2021</span>
