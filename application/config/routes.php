@@ -60,10 +60,12 @@ $route['about'] = "home_about_controller/about";
 
 $route['login'] = "logins_controller/login";
 $route['login/registre'] = "logins_controller/registre"; 
-$route['login/logout'] = "logins_controller/logout"; 
-$route['login/settings'] = "logins_controller/settings";
-$route['login/changepass'] = "logins_controller/changepass";
-$route['login/profile'] = "logins_controller/profile";
+$route['login/logout'] = "users_controller/logout"; 
+$route['login/settings'] = "users_controller/settings";
+$route['login/settings_update'] = "users_controller/settings_update";
+$route['login/changepass'] = "users_controller/changepass";
+$route['login/changepass_update'] = "users_controller/changepass_update";
+$route['login/profile'] = "users_controller/profile";
 
 
 $route['tree/category'] = 'tree/treecat_controller/index'; 
@@ -72,4 +74,7 @@ $route['tree/category'] = 'tree/treecat_controller/index';
 $route['users/usersgrocery'] = 'logins_controller/usersgrocery';
 $route['users/usersgrocery/(:any)'] = 'logins_controller/usersgrocery/$1';
 $route['users/usersgrocery/(:any)/(:any)'] = 'logins_controller/usersgrocery/$1/$2';
+
+
+$route['recurs/formrecurs'] = 'recursos_controller/formrecurs';
 

@@ -23,7 +23,7 @@ include "navbar-private.php"; ?>
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Actualitzar Dades Usuari</h1>
                                 </div>
-                                <form class="user" action="<?php echo base_url('login/settings') ?>" method="POST">
+                                <form class="user" action="<?php echo base_url('login/settings_update') ?>" method="POST">
                                     <div class="form-group row">
                                     <input type="hidden" name="id" value="<?php echo $user->id; ?>">
                                         <div class="col-sm-6 mb-3 mb-sm-0">

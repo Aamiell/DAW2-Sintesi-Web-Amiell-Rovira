@@ -88,67 +88,20 @@ class Logins_controller extends CI_Controller //Private_controller
         }
     }
 
-    public function settings()
+    public function isgroup()
     {
-        $user = $this->ion_auth->user()->row();
-        $id = $user->id;
-        $data["user"] = $user;
-        $this->load->view('login/settings', $data);
-
-
-        $first_name = $this->input->post('firstname');
-        $last_name = $this->input->post('lastname');
-        $username = $this->input->post('user');
-        $email = $this->input->post('email');
-
-        $data_update = array(
-            'id' => $id,
-            'first_name' => $first_name,
-            'last_name' => $last_name,
-            'username' => $username,
-            'email' => $email
-        );
-        $this->ion_auth->update($id, $data_update);
-        //die($user->id);
-    }
-    public function changepass()
-    {
-        $user = $this->ion_auth->user()->row();
-        $id = $user->id;
-        $data["user"] = $user;
-        $this->load->view('login/changepass', $data);
-        $password = $this->input->post('actupass');
-        $new_pass = $this->input->post('newpass');
-        $new_pass2 = $this->input->post('newpass2');
-
-        if ($this->ion_auth->login($id, $password) || $new_pass == $new_pass2) {
-            $data_update = array(
-                'id' => $id,
-                'first_name' => $new_pass,
-            );
-            $this->ion_auth->update($id, $data_update);
-            die("HOLA");
-        }
-    }
-
-    public function profile()
-    {
-        $user = $this->ion_auth->user()->row();
-        $data["user"] = $user;
-        $this->load->view('login/profile', $data);
-        //die(print_r($data));
-    }
-
-    public function logout()
-    {
-        //die("HOLA");
-        $this->ion_auth->logout();
-        redirect(base_url('login'));
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+        $this->load->view('login/navbar-private', $data);
     }
 
     public function usersgrocery()
     {
-        $this->load->view('login/navbar-private');
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+        $this->load->view('login/navbar-private', $data);
         $crud = new grocery_CRUD();
 
         $crud->set_theme('tablestrap4');

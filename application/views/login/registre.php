@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 <?php
 include "navbar-public.php"; ?>
 <!-- End of Topbar -->
@@ -44,16 +45,20 @@ include "navbar-public.php"; ?>
                                         <input type="password" class="form-control form-control-user" name="pass" id="exampleInputPass" placeholder="Password...">
                                     </div>
                                     <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" name="casella" id="casella">
-                                            <label class="custom-control-label" for="customCheck">Aceptes els termens de privacitat <a href="<?php echo base_url('assets/docs/PoliticaDePrivacidadAccess&Resource.pdf') ?>" class="stretched-link">ACCESS&RESOURCE</a></label>
+                                        <div class="custom-control form-check small">
+                                            <input type="checkbox" class="form-check-input" name="casella" id="casella">
+                                            <label class="form-check-label" for="customCheck">Aceptes els termens de privacitat </label>
+                                            <a href="<?php echo base_url('assets/docs/PoliticaDePrivacidadAccess&Resource.pdf') ?>" >ACCESS&RESOURCE</a>
                                         </div>
                                     </div>
                                     <input type="submit" class="btn btn-primary btn-user btn-block" value="Registrar">
                                 </form>
                                 <hr>
-                                <div class="alert alert-danger" role="alert">
-                                    <?php echo validation_errors(); ?></div>
+                                <?php if (validation_errors()!=null) { ?>                                    
+                                    <div class="alert alert-danger" role="alert">
+                                    <?php echo validation_errors(); ?>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

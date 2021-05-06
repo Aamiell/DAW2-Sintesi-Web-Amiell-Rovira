@@ -1,3 +1,7 @@
+<link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/css/sb-admin-2.min.css'); ?>">
+<link rel="stylesheet" href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css'); ?>">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 <!-- End of Topbar -->
 
 <!-- Begin Page Content -->
@@ -13,7 +17,7 @@
         <div class="container">
             <!-- Nested Row within Card Body -->
             <div class="row">
-                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" style="width:74%; height: 10%;">
+                <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel" style="margin-left: 15%; width:70%; height: 10%;">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <img src="<?php echo base_url('assets/img/pro.jpg') ?>" class="d-block w-100" alt="...">
@@ -22,7 +26,7 @@
                             <img src="<?php echo base_url('assets/img/cv.jpg') ?>" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="<?php echo base_url('assets/img/logo2.jpg') ?>" class="d-block w-100" alt="...">
+                            <img src="<?php echo base_url('assets/img/pro.jpg') ?>" class="d-block w-100" alt="...">
                         </div>
                     </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">

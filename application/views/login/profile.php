@@ -39,11 +39,20 @@ include "navbar-private.php"; ?>
                                     <div class="form-group">
                                         <div style="border: 2px solid grey; border-radius: 25px; padding: 10px; "><b>Email: </b><?php echo $user->email; ?></div>
                                     </div>
-                                    <div class="form-group">
-                                        <div style="border: 2px solid grey; border-radius: 25px; padding: 10px; "><b>Contrasenya: </b><?php echo $user->password; ?></div>
-                                    </div>
                                     <form>
-                                        
+                                        <div class="form-group row">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <a href="<?php echo base_url('login/settings'); ?>" class="btn btn-success btn-user btn-block">
+                                                    Actualitzar informació
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-6">
+                                            <a href="<?php echo base_url('login/changepass'); ?>" class="btn btn-warning btn-user btn-block">
+                                                    Actualitzar contrasenya
+                                            </a>
+                                            </div>
+                                        </div>
+
                             </div>
                         </div>
                     </div>

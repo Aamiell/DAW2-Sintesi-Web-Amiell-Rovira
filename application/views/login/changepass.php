@@ -23,7 +23,7 @@ include "navbar-private.php"; ?>
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Actualitzar contrasenya</h1>
                                 </div>
-                                <form class="user" action="<?php echo base_url('login/changepass') ?>" method="POST">
+                                <form class="user" action="<?php echo base_url('login/changepass_update') ?>" method="POST">
                                     <input type="hidden" name="id" value="<?php echo $user->id; ?>">
                                     <div class="form-group">
                                         <input type="text" class="form-control form-control-user" name="actupass" id="exampleInputActuPass" placeholder="Contrasenya ">
