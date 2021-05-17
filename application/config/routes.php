@@ -57,7 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['home'] = "home_about_controller/home"; 
 $route['about'] = "home_about_controller/about"; 
-
+// Routes del login
 $route['login'] = "logins_controller/login";
 $route['login/registre'] = "logins_controller/registre"; 
 $route['login/logout'] = "users_controller/logout"; 
@@ -67,14 +67,25 @@ $route['login/changepass'] = "users_controller/changepass";
 $route['login/changepass_update'] = "users_controller/changepass_update";
 $route['login/profile'] = "users_controller/profile";
 
+//Routa per mostrar les categories
+$route['tree/category'] = 'treecat_controller/index'; 
 
-$route['tree/category'] = 'tree/treecat_controller/index'; 
+// Routes per els grocerys del admin
+$route['users/usersgrocery'] = 'grocery_controller/usersgrocery';
+$route['users/usersgrocery/(:any)'] = 'grocery_controller/usersgrocery/$1';
+$route['users/usersgrocery/(:any)/(:any)'] = 'grocery_controller/usersgrocery/$1/$2';
 
+$route['users/users_groupgrocery'] = 'grocery_controller/users_groupgrocery';
+$route['users/users_groupgrocery/(:any)'] = 'grocery_controller/users_groupgrocery/$1';
+$route['users/users_groupgrocery/(:any)/(:any)'] = 'grocery_controller/users_groupgrocery/$1/$2';
 
-$route['users/usersgrocery'] = 'logins_controller/usersgrocery';
-$route['users/usersgrocery/(:any)'] = 'logins_controller/usersgrocery/$1';
-$route['users/usersgrocery/(:any)/(:any)'] = 'logins_controller/usersgrocery/$1/$2';
-
-
+// Routes per crear els recursos
 $route['recurs/formrecurs'] = 'recursos_controller/formrecurs';
+
+$route['recurs/recursosgrocery'] = 'recursos_controller/recursosgrocery';
+$route['recurs/recursosgrocery/(:any)'] = 'recursos_controller/recursosgrocery/$1';
+$route['recurs/recursosgrocery/(:any)/(:any)'] = 'recursos_controller/recursosgrocery/$1/$2';
+
+$route['upload/do_upload'] = 'upload_controller/do_upload';
+$route['upload'] = 'upload_controller/index';
 

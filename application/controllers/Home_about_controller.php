@@ -17,8 +17,18 @@ class Home_about_controller extends CI_Controller
 
     public function home()
     {
-        $this->load->view('login/navbar-public');
-        $this->load->view('pages/home');
+        if (!$this->ion_auth->logged_in()) {
+            $this->load->view('login/navbar-public');
+            $this->load->view('pages/home');
+        } else {
+            $data['isalumne'] = $this->ion_auth->in_group("alumne");
+            $data['isprofe'] = $this->ion_auth->in_group("profe");
+            $data['isadmin'] = $this->ion_auth->in_group("admin");
+            $this->load->view('login/navbar-private', $data);
+            $this->load->view('pages/home');
+        }
+        //$this->load->view('pages/home');
+        //$this->load->view('login/navbar-public');
     }
 
     public function about()

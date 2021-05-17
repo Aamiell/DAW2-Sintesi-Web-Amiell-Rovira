@@ -14,17 +14,23 @@ class Treecat_controller  extends CI_Controller
     {
         $data['controller'] = $this;
         $data["cat"] = $this->treecat_model->get_fills(NULL);
+        if (!$this->ion_auth->logged_in()) {
+            $this->load->view('login/navbar-public');
+        } else {
+            $data['isalumne'] = $this->ion_auth->in_group("alumne");
+            $data['isprofe'] = $this->ion_auth->in_group("profe");
+            $data['isadmin'] = $this->ion_auth->in_group("admin");
+            $this->load->view('templates/footer', $data);
+            $this->load->view('login/navbar-private', $data);
+        }
+        
+
 
         $this->load->view('tree/index', $data);
     }
 
-    /**
-     * mostrar_taula
-     * $categories
-     */
     public function mostrar_tree($categories)
     {
-        //mostrar categoria
         echo "<ol>";
 
         foreach ($categories as $cat) {

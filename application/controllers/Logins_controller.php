@@ -10,7 +10,7 @@ class Logins_controller extends CI_Controller //Private_controller
         $this->load->helper('url_helper');
         $this->load->library('session');
         $this->load->library('ion_auth');
-        $this->load->helper('form');
+        $this->load->helper('form'); 
         $this->load->library('form_validation');
         $this->load->library('grocery_CRUD');
     }
@@ -24,9 +24,8 @@ class Logins_controller extends CI_Controller //Private_controller
 
         // die($identity."-".$password);
         if ($this->ion_auth->login($identity, $password)) {
-
             //die('user ok');
-            redirect(base_url('login/profile'));
+            redirect(base_url('login/profile')); 
         }
     }
 
@@ -93,37 +92,6 @@ class Logins_controller extends CI_Controller //Private_controller
         $data['isalumne'] = $this->ion_auth->in_group("alumne");
         $data['isprofe'] = $this->ion_auth->in_group("profe");
         $data['isadmin'] = $this->ion_auth->in_group("admin");
-        $this->load->view('login/navbar-private', $data);
-    }
-
-    public function usersgrocery()
-    {
-        $data['isalumne'] = $this->ion_auth->in_group("alumne");
-        $data['isprofe'] = $this->ion_auth->in_group("profe");
-        $data['isadmin'] = $this->ion_auth->in_group("admin");
-        $this->load->view('login/navbar-private', $data);
-        $crud = new grocery_CRUD();
-
-        $crud->set_theme('tablestrap4');
-        $crud->set_table('users');
-
-        $crud->columns('first_name', 'last_name', 'username', 'email', 'password');
-
-        $crud->display_as('first_name', 'Nom');
-        $crud->display_as('last_name', 'Cognom');
-        $crud->display_as('username', 'Usuari');
-        $crud->display_as('email', 'Email');
-        $crud->display_as('password', 'Contrasenya');
-
-        $crud->change_field_type('id', 'invisible');
-
-        $output = $crud->render();
-        $this->_render_output($output);
-    }
-
-    protected function _render_output($output = null)
-    {
-
-        $this->load->view('grocery/groceryusers', (array)$output);
+        $this->load->view('login/navbar-private', $data); 
     }
 }

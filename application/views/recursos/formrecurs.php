@@ -1,5 +1,5 @@
 <!-- End of Topbar -->
-
+<script src="https://cdn.tiny.cloud/1/e2tgnbfthwd0opuvogjvl20bqeeaw4m2a3nf2pefrq6kefh6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -26,78 +26,86 @@
 
                                 <script>
                                     function canviSelect() {
+                                        tinymce.init({
+                                            selector: '#explicacio',
+                                            plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+                                            toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+                                            toolbar_mode: 'floating',
+                                            tinycomments_mode: 'embedded',
+                                            tinycomments_author: 'Author name',
+                                        });
                                         var sel = document.getElementById("recurs");
                                         //alert('el tipus es: ' + sel.value);
-                                        if (sel.value == 1) {
+                                        if (sel.value == 'infografia') {
                                             //alert('1')
                                             document.getElementById('titol').hidden = false;
                                             document.getElementById('descripcio').hidden = false;
                                             document.getElementById('explicacio').hidden = false;
-                                            document.getElementById('tags').hidden = false;
                                             document.getElementById('arxiu').hidden = false;
-                                        } else if (sel.value == 2) {
+                                            document.getElementById('boto').hidden = false;
+                                            document.getElementById('tags').hidden = false;
+                                        } else if (sel.value == 'video') {
                                             //alert('2');
                                             document.getElementById('titol').hidden = false;
                                             document.getElementById('descripcio').hidden = false;
                                             document.getElementById('explicacio').hidden = false;
-                                            document.getElementById('tags').hidden = false;
                                             document.getElementById('arxiu').hidden = false;
-                                        } else if (sel.value == 3) {
+                                            document.getElementById('boto').hidden = false;
+                                            document.getElementById('tags').hidden = false;
+                                        } else if (sel.value == 'linkvideo') {
                                             //alert('3');
                                             document.getElementById('titol').hidden = false;
                                             document.getElementById('descripcio').hidden = false;
                                             document.getElementById('explicacio').hidden = false;
+                                            document.getElementById('link').hidden = false;
+                                            document.getElementById('boto').hidden = false;
                                             document.getElementById('tags').hidden = false;
-                                            document.getElementById('arxiu').hidden = false;
-                                        } else if (sel.value == 4) {
+                                        } else if (sel.value == 'pissarra') {
                                             //alert('4');
                                             document.getElementById('titol').hidden = false;
                                             document.getElementById('descripcio').hidden = false;
                                             document.getElementById('explicacio').hidden = false;
+                                            document.getElementById('pissarra').hidden = false;
+                                            document.getElementById('boto').hidden = false;
                                             document.getElementById('tags').hidden = false;
-                                            document.getElementById('arxiu').hidden = false;
                                         }
                                     }
                                 </script>
-                                <form class="user" action="<?php echo base_url('recursos/formrecurs') ?>" method="POST">
+
+                                <form class="user" action="<?php echo base_url('recurs/formrecurs') ?>" enctype="multipart/form-data" method="POST">
                                     <div class="form-floating">
                                         <label for="recurs">Tipus de videorecurs: </label>
-                                        <select class="form-select" id="recurs" aria-label="Floating label select example" onchange="canviSelect()">
+                                        <select class="form-select" name="recurs" id="recurs" aria-label="Floating label select example" onchange="canviSelect()">
                                             <option selected>Desplega per veure les opcions</option>
-                                            <option value="1">Infografia</option>
-                                            <option value="2">Video</option>
-                                            <option value="3">Link video</option>
-                                            <option value="4">Pissara digital</option>
+                                            <option value="infografia">Infografia</option>
+                                            <option value="video">Video</option>
+                                            <option value="linkvideo">Link video</option>
+                                            <option value="pissarra">Pissarra digital</option>
                                         </select>
                                     </div>
-                                    <input hidden type='file' id="arxiu">
-                                    <br><br>
+
+                                    <input hidden type="file" name="arxiu" id="arxiu" size="20" />
+                                    <br>
                                     <div class="form-group">
-                                        <input hidden type="text" class="form-control form-control-user" name="titol" id="titol" placeholder="Titol...">
+                                        <input hidden type="text" class="form-control" name="link" id="link" placeholder="Link...">
                                     </div>
                                     <div class="form-group">
-                                        <input hidden type="textarea" class="form-control form-control-user" name="descripcio" id="descripcio" placeholder="Descripcio...">
+                                        <input hidden type="text" class="form-control" name="titol" id="titol" placeholder="Titol...">
                                     </div>
                                     <div class="form-group">
-                                        <input hidden type="textarea" class="form-control form-control-user" name="explicacio" id="explicacio" placeholder="Explicacio...">
+                                        <textarea hidden type="textarea" class="form-control" name="descripcio" id="descripcio" placeholder="Descripcio..."></textarea>
                                     </div>
-                                    <div class="form-group">
-                                        <input hidden type="email" class="form-control form-control-user" name="tags" id="tags" placeholder="AdministraciÓ TAGS...">
-                                    </div>
-                                    <!--<div class="form-group">
-                                        <input type="password" class="form-control form-control-user" name="pass" id="exampleInputPass" placeholder="Password...">
-                                    </div>-->
-                                    <!--<div class="form-group">
-                                        <div class="custom-control form-check small">
-                                            <input type="checkbox" class="form-check-input" name="casella" id="casella">
-                                            <label class="form-check-label" for="customCheck">Aceptes els termens de privacitat </label>
-                                            <a href="<?php //echo base_url('assets/docs/PoliticaDePrivacidadAccess&Resource.pdf') 
-                                                        ?>" >ACCESS&RESOURCE</a>
-                                        </div>
-                                    </div>-->
-                                    <input type="submit" class="btn btn-primary btn-user btn-block" value="Afegir Recurs">
+                                    <textarea hidden="true" type="textarea" id="explicacio" name="explicacio" placeholder="Explicacio..."></textarea>
+                                    <br>
+                                    <input hidden id="boto" name="boto" type="submit" class="btn btn-primary btn-user btn-block" value="Afegir Recurs">
                                 </form>
                                 <hr>
+                                <?php
+                                if (isset($error)) { ?>
+                                    <div class="alert alert-danger" role="alert">
+                                        <?php echo $error ?>
+                                    </div>
+                                <?php } ?>
                                 <?php if (validation_errors() != null) { ?>
                                     <div class="alert alert-danger" role="alert">
                                         <?php echo validation_errors(); ?>

@@ -1,3 +1,5 @@
+<!DOCTYPE HTML>
+<html>
 <head>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/sb-admin-2.min.css'); ?>">
@@ -22,7 +24,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="<?php echo base_url('login'); ?>">
+                <a class="nav-link" href="<?php echo base_url('home'); ?>">
                     <i class="fas fa-home"></i>
                     <span>HOME</span></a>
             </li>
@@ -37,21 +39,14 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="<?php echo base_url('tree/category'); ?>">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Cursos</span></a>
+            </li>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
+            <!--<li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Utilities</span>
@@ -65,7 +60,7 @@
                         <a class="collapse-item" href="utilities-other.html">Other</a>
                     </div>
                 </div>
-            </li>
+            </li>-->
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -85,15 +80,15 @@
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Rol: Alumne</h6>
-                        <a class="collapse-item" href="login.html">Perfil</a>
-                        <a class="collapse-item" href="register.html">Register</a>
+                        <a class="collapse-item" href="<?php echo base_url('login/profile'); ?>">Perfil</a>
+                        <!--<a class="collapse-item" href="register.html">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
                         <a class="collapse-item" href="404.html">404 Page</a>
                         <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
-                </div>
+                </div>-->
             </li>
             <?php } ?>
 
@@ -108,7 +103,7 @@
                         <h6 class="collapse-header">Rol: Professor</h6>
                         <a class="collapse-item" href="<?php echo base_url('login/profile'); ?>">Perfil</a>
                         <a class="collapse-item" href="<?php echo base_url('recurs/formrecurs'); ?>">Crear Recurs</a>
-                        <a class="collapse-item" href="<?php echo base_url('recurs/recursos'); ?>">Modificar Recurs</a>
+                        <a class="collapse-item" href="<?php echo base_url('recurs/recursosgrocery'); ?>">Modificar Recurs</a>
                         <!--<a class="collapse-item" href="register.html">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
@@ -122,17 +117,18 @@
 
             <?php if ($isadmin){ ?>
                 <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Opcions</span>
                 </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Rol: ADMIN</h6>
-                        <a class="collapse-item" href="login.html">Gestioanar Usuaris</a>
+                        <a class="collapse-item" href="<?php echo base_url('users/usersgrocery'); ?>">Gestioanar Usuaris</a>
+                        <a class="collapse-item" href="<?php echo base_url('users/users_groupgrocery'); ?>">Gestioanar Grups</a>
                         <a class="collapse-item" href="<?php echo base_url('login/profile'); ?>">Perfil</a>
                         <a class="collapse-item" href="<?php echo base_url('recurs/formrecurs'); ?>">Crear Recurs</a>
-                        <a class="collapse-item" href="<?php echo base_url('recurs/recursos'); ?>">Modificar Recurs</a>
+                        <a class="collapse-item" href="<?php echo base_url('recurs/recursosgrocery'); ?>">Modificar Recurs</a>
                         <!--<a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
@@ -163,9 +159,11 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
+            <?php if (!$isadmin){ ?>
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
+            <?php } ?>
 
             <!-- Sidebar Message 
             <div class="sidebar-card">
