@@ -26,7 +26,7 @@ include "navbar-private.php"; ?>
                                 <form class="user" action="<?php echo base_url('login/changepass_update') ?>" method="POST">
                                     <input type="hidden" name="id" value="<?php echo $user->id; ?>">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="actupass" id="exampleInputActuPass" placeholder="Contrasenya ">
+                                        <input type="pass" class="form-control form-control-user" name="actupass" id="exampleInputActuPass" placeholder="Contrasenya ">
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">

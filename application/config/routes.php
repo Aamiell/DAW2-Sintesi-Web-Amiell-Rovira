@@ -86,6 +86,14 @@ $route['recurs/recursosgrocery'] = 'recursos_controller/recursosgrocery';
 $route['recurs/recursosgrocery/(:any)'] = 'recursos_controller/recursosgrocery/$1';
 $route['recurs/recursosgrocery/(:any)/(:any)'] = 'recursos_controller/recursosgrocery/$1/$2';
 
+$route['recursos/recursosgrocery'] = 'grocery_controller/recursosgrocery';
+$route['recursos/recursosgrocery/(:any)'] = 'grocery_controller/recursosgrocery/$1';
+$route['recursos/recursosgrocery/(:any)/(:any)'] = 'grocery_controller/recursosgrocery/$1/$2';
+
+$route['tags/tagsgrocery'] = 'grocery_controller/tagsgrocery';
+$route['tags/tagsgrocery/(:any)'] = 'grocery_controller/tagsgrocery/$1';
+$route['tags/tagsgrocery/(:any)/(:any)'] = 'grocery_controller/tagsgrocery/$1/$2';
+
 $route['upload/do_upload'] = 'upload_controller/do_upload';
 $route['upload'] = 'upload_controller/index';
 

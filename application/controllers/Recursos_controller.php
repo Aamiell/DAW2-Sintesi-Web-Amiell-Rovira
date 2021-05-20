@@ -41,12 +41,12 @@ class Recursos_controller extends Profe_controller
             'required',
             array('required' => 'Omple el camp Explicacio')
         );
-        $this->form_validation->set_rules(
+        /*$this->form_validation->set_rules(
             'recurs',
             'Recurs',
             'required',
             array('required' => 'Selecciona un tipus de video recurs')
-        );
+        );*/
         /*         $this->form_validation->set_rules(
             'tags',
             'Tags',
@@ -58,15 +58,17 @@ class Recursos_controller extends Profe_controller
             $data['error'] = "";
             $this->load->view('recursos/formrecurs', $data);
         } else {
-            // if per saber quina opcio del select a marcat
-            $config['upload_path']          = "./uploads";
-            $config['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config['encrypt_name'] = true;
-            //$config['max_size']             = 100;
-            //$config['max_width']            = 1024;
-            //$config['max_height']           = 768;
-
-            $this->upload->initialize($config);
+            if ($this->input->post("recurs") == "infografia") {
+                $config['upload_path']          = "./uploads";
+                $config['allowed_types']        = 'gif|jpg|png|jpeg';
+                $config['encrypt_name'] = true;
+                $this->upload->initialize($config);
+            } else if ($this->input->post("recurs") == "video") {
+                $config['upload_path']          = "./uploads";
+                $config['allowed_types']        = 'mp4|avi|mkv|flv';
+                $config['encrypt_name'] = true;
+                $this->upload->initialize($config);
+            }
 
             if (!$this->upload->do_upload('arxiu')) {
                 $error = array('error' => $this->upload->display_errors());
@@ -76,10 +78,32 @@ class Recursos_controller extends Profe_controller
                 $nom = $data['info_fichero']['file_name'];
                 $extensio = $data['info_fichero']['file_ext'];
                 $tamany = $data['info_fichero']['file_size'];
+                $user = $this->ion_auth->user()->row();
                 $data['error'] = "";
-                $this->recursos_model->set_recurs();
-                $this->recursos_model->set_fitxer($nom, $extensio, $tamany);
+                $id_recurs = $this->recursos_model->set_recurs($user->username);
+                $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
                 $this->load->view('recursos/formrecurs', $data);
+            }
+            for ($i = 1; $i <= 3; $i++) {
+                if (isset($_FILES["adjunts" . $i]) && $_FILES["adjunts" . $i]["name"] != null) {
+                    $config['upload_path']          = "./uploads";
+                    $config['allowed_types']        = 'gif|jpg|png|jpeg|docx|xlsx|pptx|odt|ods|odp|pdf';
+                    $config['encrypt_name'] = true;
+                    $this->upload->initialize($config);
+                    if (!$this->upload->do_upload("adjunts" . $i)) {
+                        $error = array('error' => $this->upload->display_errors());
+                        $this->load->view('recursos/formrecurs', $error);
+                    } else {
+                        $data = array('info_fichero' => $this->upload->data());
+                        $nom = $data['info_fichero']['file_name'];
+                        $extensio = $data['info_fichero']['file_ext'];
+                        $tamany = $data['info_fichero']['file_size'];
+                        $user = $this->ion_auth->user()->row();
+                        $data['error'] = "";
+                        $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
+                        $this->load->view('recursos/formrecurs', $data);
+                    }
+                }
             }
         }
     }
@@ -92,16 +116,23 @@ class Recursos_controller extends Profe_controller
         $data['isadmin'] = $this->ion_auth->in_group("admin");
         $this->load->view('login/navbar-private', $data);
         $crud = new grocery_CRUD();
+        $crud->set_language("catalan");
+
+        $user = $this->ion_auth->user()->row();
+
+        $crud->where('propietari', $user->username);
 
         $crud->set_theme('tablestrap4');
         $crud->set_table('recursos');
 
-        $crud->columns('tipus_recurs', 'titol', 'tipus_access');
+        $crud->columns('tipus_recurs', 'titol', 'propietari');
+        $crud->change_field_type('tipus_recurs', 'disabled');
 
         $crud->display_as('tipus_recurs', 'Tipus Recurs');
         $crud->display_as('titol', 'Titol');
         $crud->display_as('tipus_access', 'Access');
         $crud->display_as('email', 'Email');
+        $crud->display_as('propietari', 'Propietari');
         $crud->change_field_type('id', 'invisible');
 
         $crud->unset_clone();

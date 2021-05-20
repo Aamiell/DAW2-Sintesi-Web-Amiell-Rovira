@@ -11,7 +11,7 @@ class Recursos_model extends CI_Model
     }
 
 
-public function set_recurs() 
+public function set_recurs($user) 
     {
         $this->load->helper('url');
 
@@ -19,22 +19,22 @@ public function set_recurs()
             'tipus_recurs' => $this->input->post('recurs'),
             'titol' => $this->input->post('titol'),
             'descripcio' => $this->input->post('descripcio'),
-            'explicacio' => $this->input->post('explicacio')
-            //'id' => $this->input->post('id')
+            'explicacio' => $this->input->post('explicacio'),
+            'propietari' => $user
         );
 
-        return $this->db->insert('recursos', $data);
+        $this->db->insert('recursos', $data);
+        return $this->db->insert_id();
     }
-    public function set_fitxer($nom, $extesio, $tamany) 
+    public function set_fitxer($nom, $extensio, $tamany, $id_recurs) 
     {
         $this->load->helper('url');
 
-        //$fitxer = $this->input->post('arxiu');
         $data = array(
-            'extensio' => $extesio,
+            'extensio' => $extensio,
             'nom' => $nom,
             'tamany_bytes' => $tamany,
-            'id_recurs' => 1,
+            'id_recurs' => $id_recurs
         );
 
         return $this->db->insert('fitxers', $data);

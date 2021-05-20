@@ -124,11 +124,12 @@
                 <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Rol: ADMIN</h6>
-                        <a class="collapse-item" href="<?php echo base_url('users/usersgrocery'); ?>">Gestioanar Usuaris</a>
-                        <a class="collapse-item" href="<?php echo base_url('users/users_groupgrocery'); ?>">Gestioanar Grups</a>
                         <a class="collapse-item" href="<?php echo base_url('login/profile'); ?>">Perfil</a>
                         <a class="collapse-item" href="<?php echo base_url('recurs/formrecurs'); ?>">Crear Recurs</a>
-                        <a class="collapse-item" href="<?php echo base_url('recurs/recursosgrocery'); ?>">Modificar Recurs</a>
+                        <a class="collapse-item" href="<?php echo base_url('users/usersgrocery'); ?>">Gestioanar Usuaris</a>
+                        <a class="collapse-item" href="<?php echo base_url('users/users_groupgrocery'); ?>">Gestioanar Grups</a>
+                        <a class="collapse-item" href="<?php echo base_url('recursos/recursosgrocery'); ?>">Gestionar Recursos</a>
+                        <a class="collapse-item" href="<?php echo base_url('tags/tagsgrocery'); ?>">Gestionar Tags</a>
                         <!--<a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>

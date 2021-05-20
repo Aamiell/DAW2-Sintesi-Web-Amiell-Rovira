@@ -28,7 +28,7 @@
 				} ?>
 
 				<?php if(!$unset_read){?>
-					<a href="<?php echo $row->read_url?>" class="edit_button btn btn-xs btn-info btn-sm" role="button">
+					<a href="<?php echo $row->read_url?>" class="edit_button btn btn-xs btn-outline-info btn-sm" role="button">
 						<i class="fas fa-info-circle"></i>
 						<?php echo $this->l('list_view');?>
 					</a>
@@ -42,7 +42,7 @@
                 <?php }?>
 
 				<?php if(!$unset_edit){?>
-					<a href="<?php echo $row->edit_url?>" class="edit_button btn btn-xs btn-info btn-sm hidden-xs" role="button">
+					<a href="<?php echo $row->edit_url?>" class="edit_button btn btn-xs btn-outline-info btn-sm hidden-xs" role="button">
 						<i class="fas fa-pencil-alt"></i>
 						<?php echo $this->l('list_edit'); ?>
 					</a>
@@ -50,7 +50,7 @@
 
 				<?php if(!$unset_delete){?>
 					<a onclick = "javascript: return delete_row('<?php echo $row->delete_url?>', '<?php echo $num_row?>')"
-						href="javascript:void(0)" class="delete_button btn btn-xs btn-danger btn-sm hidden-xs" role="button">
+						href="javascript:void(0)" class="delete_button btn btn-xs btn-outline-danger btn-sm hidden-xs" role="button">
 						<i class="fas fa-trash"></i>
 						<?php echo $this->l('list_delete'); ?>
 					</a>
@@ -67,7 +67,7 @@
 			<?php }?>
 			<?php if(!$unset_delete || !$unset_edit || !$unset_read || !empty($actions)){?>
 				<th>
-					<button class="btn btn-success refresh-data btn-block" role="button" data-url="<?php echo $ajax_list_url; ?>">
+					<button class="btn btn-outline-dark refresh-data btn-block" role="button" data-url="<?php echo $ajax_list_url; ?>">
 						<i class="fas fa-sync-alt"></i> Clear Filter
 					</button>
 				</th>

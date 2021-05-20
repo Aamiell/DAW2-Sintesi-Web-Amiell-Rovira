@@ -22,9 +22,7 @@ class Logins_controller extends CI_Controller //Private_controller
         $identity = $this->input->post('user');
         $password = $this->input->post('pass');
 
-        // die($identity."-".$password);
         if ($this->ion_auth->login($identity, $password)) {
-            //die('user ok');
             redirect(base_url('login/profile'));
         }
     }
@@ -69,7 +67,6 @@ class Logins_controller extends CI_Controller //Private_controller
         );
 
         if ($this->form_validation->run() === FALSE) {
-            //$data['missatge'] = '<center><h5>OMPLE TOTS ELS CAMPS I MARCA LA CASELLA</h5></center>';
             $this->load->view('login/registre');
         } else {
             $first_name = $this->input->post('firstname');
@@ -93,36 +90,5 @@ class Logins_controller extends CI_Controller //Private_controller
         $data['isprofe'] = $this->ion_auth->in_group("profe");
         $data['isadmin'] = $this->ion_auth->in_group("admin");
         $this->load->view('login/navbar-private', $data);
-    }
-
-    public function usersgrocery()
-    {
-        $data['isalumne'] = $this->ion_auth->in_group("alumne");
-        $data['isprofe'] = $this->ion_auth->in_group("profe");
-        $data['isadmin'] = $this->ion_auth->in_group("admin");
-        $this->load->view('login/navbar-private', $data);
-        $crud = new grocery_CRUD();
-
-        $crud->set_theme('tablestrap4');
-        $crud->set_table('users');
-
-        $crud->columns('first_name', 'last_name', 'username', 'email', 'password');
-
-        $crud->display_as('first_name', 'Nom');
-        $crud->display_as('last_name', 'Cognom');
-        $crud->display_as('username', 'Usuari');
-        $crud->display_as('email', 'Email');
-        $crud->display_as('password', 'Contrasenya');
-
-        $crud->change_field_type('id', 'invisible');
-
-        $output = $crud->render();
-        $this->_render_output($output);
-    }
-
-    protected function _render_output($output = null)
-    {
-
-        $this->load->view('grocery/groceryusers', (array)$output);
     }
 }

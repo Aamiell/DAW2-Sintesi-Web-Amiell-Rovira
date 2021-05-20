@@ -33,7 +33,6 @@ include "navbar-public.php"; ?>
                                             <div class="form-group">
                                                 <input type="password" class="form-control form-control-user" name="pass" id="exampleInputPassword" placeholder="Password...">
                                             </div>
-
                                             <button type="submit" class="btn btn-success btn-user btn-block">
                                                 Login
                                             </button>

@@ -82,7 +82,7 @@
 	<div class="dataTablesContainer">
 		<div class="panel-body">
 			<?php if(!$unset_add){?>
-				<a role="button" class="add_button btn btn-light hidden-xs" href="<?php echo $add_url?>">
+				<a role="button" class="add_button btn btn-outline-success hidden-xs" href="<?php echo $add_url?>">
 					<i class="fas fa-plus"></i>
 					<span class="ui-button-text"><?php echo $this->l('list_add'); ?> <?php echo $subject?></span>
 				</a>

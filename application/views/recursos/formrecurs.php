@@ -33,27 +33,51 @@
                                             toolbar_mode: 'floating',
                                             tinycomments_mode: 'embedded',
                                             tinycomments_author: 'Author name',
+                                            language: 'ca',
                                         });
                                         var sel = document.getElementById("recurs");
-                                        //alert('el tipus es: ' + sel.value);
-                                        if (sel.value == 'infografia') {
+                                        if (sel.value == 'frase') {
+                                            document.getElementById('link').hidden = true;
+                                            document.getElementById('titol').hidden = true;
+                                            document.getElementById('descripcio').hidden = true;
+                                            document.getElementById('explicacio').hidden = true;
+                                            document.getElementById('arxiu').hidden = true;
+                                            document.getElementById('boto').hidden = true;
+                                            document.getElementById('adjunts1').hidden = true;
+                                            document.getElementById('adjunts2').hidden = true;
+                                            document.getElementById('adjunts3').hidden = true;
+                                            document.getElementById('tags').hidden = true;
+                                        }
+                                        else if (sel.value == 'infografia') {
                                             //alert('1')
+                                            document.getElementById('link').hidden = true;
                                             document.getElementById('titol').hidden = false;
                                             document.getElementById('descripcio').hidden = false;
                                             document.getElementById('explicacio').hidden = false;
                                             document.getElementById('arxiu').hidden = false;
                                             document.getElementById('boto').hidden = false;
+                                            document.getElementById('adjunts1').hidden = false;
+                                            document.getElementById('adjunts2').hidden = false;
+                                            document.getElementById('adjunts3').hidden = false;
                                             document.getElementById('tags').hidden = false;
                                         } else if (sel.value == 'video') {
                                             //alert('2');
+                                            document.getElementById('arxiu').hidden = false;
+                                            document.getElementById('link').hidden = true;
+                                            document.getElementById('adjunts1').hidden = false;
+                                            document.getElementById('adjunts2').hidden = false;
+                                            document.getElementById('adjunts3').hidden = false;
                                             document.getElementById('titol').hidden = false;
                                             document.getElementById('descripcio').hidden = false;
                                             document.getElementById('explicacio').hidden = false;
-                                            document.getElementById('arxiu').hidden = false;
                                             document.getElementById('boto').hidden = false;
                                             document.getElementById('tags').hidden = false;
                                         } else if (sel.value == 'linkvideo') {
                                             //alert('3');
+                                            document.getElementById('arxiu').hidden = true;
+                                            document.getElementById('adjunts1').hidden = false;
+                                            document.getElementById('adjunts2').hidden = false;
+                                            document.getElementById('adjunts3').hidden = false;
                                             document.getElementById('titol').hidden = false;
                                             document.getElementById('descripcio').hidden = false;
                                             document.getElementById('explicacio').hidden = false;
@@ -62,30 +86,34 @@
                                             document.getElementById('tags').hidden = false;
                                         } else if (sel.value == 'pissarra') {
                                             //alert('4');
+                                            document.getElementById('arxiu').hidden = true;
                                             document.getElementById('titol').hidden = false;
                                             document.getElementById('descripcio').hidden = false;
                                             document.getElementById('explicacio').hidden = false;
-                                            document.getElementById('pissarra').hidden = false;
+                                            //document.getElementById('pissarra').hidden = false;
                                             document.getElementById('boto').hidden = false;
+                                            document.getElementById('link').hidden = true;
                                             document.getElementById('tags').hidden = false;
                                         }
                                     }
                                 </script>
-
                                 <form class="user" action="<?php echo base_url('recurs/formrecurs') ?>" enctype="multipart/form-data" method="POST">
                                     <div class="form-floating">
                                         <label for="recurs">Tipus de videorecurs: </label>
                                         <select class="form-select" name="recurs" id="recurs" aria-label="Floating label select example" onchange="canviSelect()">
-                                            <option selected>Desplega per veure les opcions</option>
+                                            <option value="frase" selected>Desplega per veure les opcions</option>
                                             <option value="infografia">Infografia</option>
                                             <option value="video">Video</option>
                                             <option value="linkvideo">Link video</option>
                                             <option value="pissarra">Pissarra digital</option>
                                         </select>
                                     </div>
-
                                     <input hidden type="file" name="arxiu" id="arxiu" size="20" />
-                                    <br>
+                                    <br><br>
+                                    <input hidden type="file" name="adjunts1" id="adjunts1" size="20" />
+                                    <input hidden type="file" name="adjunts2" id="adjunts2" size="20" />
+                                    <input hidden type="file" name="adjunts3" id="adjunts3" size="20" />
+                                    <br><br>
                                     <div class="form-group">
                                         <input hidden type="text" class="form-control" name="link" id="link" placeholder="Link...">
                                     </div>
@@ -101,7 +129,7 @@
                                 </form>
                                 <hr>
                                 <?php
-                                if (isset($error)) { ?>
+                                if (isset($error) && $error != "") { ?>
                                     <div class="alert alert-danger" role="alert">
                                         <?php echo $error ?>
                                     </div>
