@@ -47,8 +47,7 @@
                                             document.getElementById('adjunts2').hidden = true;
                                             document.getElementById('adjunts3').hidden = true;
                                             document.getElementById('tags').hidden = true;
-                                        }
-                                        else if (sel.value == 'infografia') {
+                                        } else if (sel.value == 'infografia') {
                                             //alert('1')
                                             document.getElementById('link').hidden = true;
                                             document.getElementById('titol').hidden = false;
@@ -59,7 +58,7 @@
                                             document.getElementById('adjunts1').hidden = false;
                                             document.getElementById('adjunts2').hidden = false;
                                             document.getElementById('adjunts3').hidden = false;
-                                            document.getElementById('tags').hidden = false;
+                                            document.getElementById('tag').hidden = false;
                                         } else if (sel.value == 'video') {
                                             //alert('2');
                                             document.getElementById('arxiu').hidden = false;
@@ -71,7 +70,7 @@
                                             document.getElementById('descripcio').hidden = false;
                                             document.getElementById('explicacio').hidden = false;
                                             document.getElementById('boto').hidden = false;
-                                            document.getElementById('tags').hidden = false;
+                                            document.getElementById('tag').hidden = false;
                                         } else if (sel.value == 'linkvideo') {
                                             //alert('3');
                                             document.getElementById('arxiu').hidden = true;
@@ -83,7 +82,7 @@
                                             document.getElementById('explicacio').hidden = false;
                                             document.getElementById('link').hidden = false;
                                             document.getElementById('boto').hidden = false;
-                                            document.getElementById('tags').hidden = false;
+                                            document.getElementById('tag').hidden = false;
                                         } else if (sel.value == 'pissarra') {
                                             //alert('4');
                                             document.getElementById('arxiu').hidden = true;
@@ -93,7 +92,7 @@
                                             //document.getElementById('pissarra').hidden = false;
                                             document.getElementById('boto').hidden = false;
                                             document.getElementById('link').hidden = true;
-                                            document.getElementById('tags').hidden = false;
+                                            document.getElementById('tag').hidden = false;
                                         }
                                     }
                                 </script>
@@ -125,6 +124,10 @@
                                     </div>
                                     <textarea hidden="true" type="textarea" id="explicacio" name="explicacio" placeholder="Explicacio..."></textarea>
                                     <br>
+                                    <?php $query = $this->db->get('tags');
+                                    foreach ($query->result() as $row) { ?>
+                                        <input type="checkbox" id="tag" name="tag[]" value="<?php echo $row->nom; ?>"> <label for="tag" id="taglabel"> <?php echo $row->nom; ?></label><br>
+                                    <?php } ?>
                                     <input hidden id="boto" name="boto" type="submit" class="btn btn-primary btn-user btn-block" value="Afegir Recurs">
                                 </form>
                                 <hr>

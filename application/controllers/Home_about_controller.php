@@ -20,15 +20,15 @@ class Home_about_controller extends CI_Controller
         if (!$this->ion_auth->logged_in()) {
             $this->load->view('login/navbar-public');
             $this->load->view('pages/home');
+            $this->load->view('templates/footer');
         } else {
             $data['isalumne'] = $this->ion_auth->in_group("alumne");
             $data['isprofe'] = $this->ion_auth->in_group("profe");
             $data['isadmin'] = $this->ion_auth->in_group("admin");
             $this->load->view('login/navbar-private', $data);
             $this->load->view('pages/home');
+            $this->load->view('templates/footer');
         }
-        //$this->load->view('pages/home');
-        //$this->load->view('login/navbar-public');
     }
 
     public function about()
@@ -43,8 +43,8 @@ class Home_about_controller extends CI_Controller
             $this->load->view('login/navbar-private', $data);
             $this->load->view('pages/about');
         }
-        //$this->load->view('templates/footer');
-        //$this->load->view('login/navbar-public');
-        //$this->load->view('pages/about');
+    }
+    public function homecarrousel() {
+        $this->load->view('pages/home2');
     }
 }

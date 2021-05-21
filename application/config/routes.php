@@ -57,6 +57,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['home'] = "home_about_controller/home"; 
 $route['about'] = "home_about_controller/about"; 
+$route['home2'] = "home_about_controller/homecarrousel"; 
 // Routes del login
 $route['login'] = "logins_controller/login";
 $route['login/registre'] = "logins_controller/registre"; 
@@ -81,6 +82,12 @@ $route['users/users_groupgrocery/(:any)/(:any)'] = 'grocery_controller/users_gro
 
 // Routes per crear els recursos
 $route['recurs/formrecurs'] = 'recursos_controller/formrecurs';
+
+$route['recurs/formrecursos'] = 'recursos_controller/formrecursos';
+$route['recurs/infografia'] = 'recursos_controller/recurs_infografia';
+$route['recurs/pissarra'] = 'recursos_controller/recurs_pissarra';
+$route['recurs/video'] = 'recursos_controller/recurs_video';
+$route['recurs/link_video'] = 'recursos_controller/recurs_link_video';
 
 $route['recurs/recursosgrocery'] = 'recursos_controller/recursosgrocery';
 $route['recurs/recursosgrocery/(:any)'] = 'recursos_controller/recursosgrocery/$1';

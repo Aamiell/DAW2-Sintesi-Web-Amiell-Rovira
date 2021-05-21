@@ -103,6 +103,7 @@
                         <h6 class="collapse-header">Rol: Professor</h6>
                         <a class="collapse-item" href="<?php echo base_url('login/profile'); ?>">Perfil</a>
                         <a class="collapse-item" href="<?php echo base_url('recurs/formrecurs'); ?>">Crear Recurs</a>
+                        <a class="collapse-item" href="<?php echo base_url('recurs/formrecursos'); ?>">Crear Recurs 2</a>
                         <a class="collapse-item" href="<?php echo base_url('recurs/recursosgrocery'); ?>">Modificar Recurs</a>
                         <!--<a class="collapse-item" href="register.html">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>

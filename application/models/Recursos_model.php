@@ -11,7 +11,7 @@ class Recursos_model extends CI_Model
     }
 
 
-public function set_recurs($user) 
+    public function set_recurs($user)
     {
         $this->load->helper('url');
 
@@ -26,7 +26,40 @@ public function set_recurs($user)
         $this->db->insert('recursos', $data);
         return $this->db->insert_id();
     }
-    public function set_fitxer($nom, $extensio, $tamany, $id_recurs) 
+
+    public function set_recurs_infografia($user)
+    {
+        $this->load->helper('url');
+        $tipus= 'infografia';
+        $data = array(
+            'tipus_recurs' => $tipus,
+            'titol' => $this->input->post('titol'),
+            'descripcio' => $this->input->post('descripcio'),
+            'explicacio' => $this->input->post('explicacio'),
+            'propietari' => $user
+        );
+
+        $this->db->insert('recursos', $data);
+        return $this->db->insert_id();
+    }
+
+    public function set_recurs_video($user)
+    {
+        $this->load->helper('url');
+        $tipus= 'video';
+        $data = array(
+            'tipus_recurs' => $tipus,
+            'titol' => $this->input->post('titol'),
+            'descripcio' => $this->input->post('descripcio'),
+            'explicacio' => $this->input->post('explicacio'),
+            'propietari' => $user
+        );
+
+        $this->db->insert('recursos', $data);
+        return $this->db->insert_id();
+    }
+
+    public function set_fitxer($nom, $extensio, $tamany, $id_recurs)
     {
         $this->load->helper('url');
 
@@ -40,4 +73,3 @@ public function set_recurs($user)
         return $this->db->insert('fitxers', $data);
     }
 }
-
