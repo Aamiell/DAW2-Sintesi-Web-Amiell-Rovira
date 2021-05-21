@@ -80,7 +80,7 @@ class Logins_controller extends CI_Controller //Private_controller
                 'last_name' => $last_name
             );
             $this->ion_auth->register($username, $password, $email, $additional_data);
-            $this->load->view('login/login');
+            $this->load->view('login/login'); 
         }
     }
 
