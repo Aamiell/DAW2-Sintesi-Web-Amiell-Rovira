@@ -111,8 +111,6 @@ class Recursos_controller extends Profe_controller
             if ($mostrarSortida) {
                 $this->load->view('recursos/formrecurs', $data);
             }
-            //Si la creat anar a la url del recurs
-            //http://localhost/sintesi/index.php/recursos/recursosgrocery/read/32
         }
     }
 
@@ -202,7 +200,6 @@ class Recursos_controller extends Profe_controller
                 }
             }
         }
-
         if ($mostrarSortida) {
             $this->load->view('recursos/formrecursos', $data);
         }
