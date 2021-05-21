@@ -18,13 +18,16 @@
                 <div style="width: 80%;" id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="<?php echo base_url('assets/img/pro.jpg') ?>" class="d-block w-100" alt="...">
+                            <img style="height: 520px;" src="<?php echo base_url('assets/img/4.jpg') ?>" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="<?php echo base_url('assets/img/cv.jpg') ?>" class="d-block w-100" alt="...">
+                            <img style="height: 520px;" src="<?php echo base_url('assets/img/2.jpeg') ?>" class="d-block w-100" alt="...">
                         </div>
                         <div class="carousel-item">
-                            <img src="<?php echo base_url('assets/img/pro.jpg') ?>" class="d-block w-100" alt="...">
+                            <img style="height: 520px;" src="<?php echo base_url('assets/img/1.jpg') ?>" class="d-block w-100" alt="...">
+                        </div>
+                        <div class="carousel-item">
+                            <img style="height: 520px;" src="<?php echo base_url('assets/img/3.jpg') ?>" class="d-block w-100" alt="...">
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">

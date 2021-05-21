@@ -154,7 +154,12 @@ class Recursos_controller extends Profe_controller
             $data['error'] = "";
             $this->load->view('recursos/infografia', $data);
         } else {
-            $config['upload_path']          = "./uploads";
+            $user = $this->ion_auth->user()->row();
+            $id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
+            mkdir('./uploads/' . $id_recurs, 0777);
+
+            //$config['upload_path']          = './uploads/';
+            $config['upload_path']          = './uploads/' . $id_recurs;
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['encrypt_name'] = true;
             $this->upload->initialize($config);
@@ -166,10 +171,10 @@ class Recursos_controller extends Profe_controller
                 $nom = $data['info_fichero']['file_name'];
                 $extensio = $data['info_fichero']['file_ext'];
                 $tamany = $data['info_fichero']['file_size'];
-                $user = $this->ion_auth->user()->row();
+                //$user = $this->ion_auth->user()->row();
                 $data['error'] = "";
                 $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -5%;" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT<b></div>');
-                $id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
+                //$id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
                 $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
                 $this->load->view('recursos/infografia', $data);
             }
@@ -203,15 +208,6 @@ class Recursos_controller extends Profe_controller
         }
     }
 
-    public function recurs_pissarra()
-    {
-        $data['isalumne'] = $this->ion_auth->in_group("alumne");
-        $data['isprofe'] = $this->ion_auth->in_group("profe");
-        $data['isadmin'] = $this->ion_auth->in_group("admin");
-        $this->load->view('login/navbar-private', $data);
-        $this->load->view('recursos/pissarra');
-    }
-
     public function recurs_video()
     {
         $data['isalumne'] = $this->ion_auth->in_group("alumne");
@@ -241,7 +237,12 @@ class Recursos_controller extends Profe_controller
             $data['error'] = "";
             $this->load->view('recursos/video', $data);
         } else {
-            $config['upload_path']          = "./uploads";
+            $user = $this->ion_auth->user()->row();
+            $id_recurs = $this->recursos_model->set_recurs_video($user->username);
+            mkdir('./uploads/' . $id_recurs, 0777);
+
+            //$config['upload_path']          = './uploads/';
+            $config['upload_path']          = './uploads/' . $id_recurs;
             $config['allowed_types']        = 'mp4|avi|mkv|flv';
             $config['encrypt_name'] = true;
             $this->upload->initialize($config);
@@ -253,10 +254,10 @@ class Recursos_controller extends Profe_controller
                 $nom = $data['info_fichero']['file_name'];
                 $extensio = $data['info_fichero']['file_ext'];
                 $tamany = $data['info_fichero']['file_size'];
-                $user = $this->ion_auth->user()->row();
+                //$user = $this->ion_auth->user()->row();
                 $data['error'] = "";
                 $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -5%;" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT<b></div>');
-                $id_recurs = $this->recursos_model->set_recurs_video($user->username);
+                //$id_recurs = $this->recursos_model->set_recurs_video($user->username);
                 $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
                 $this->load->view('recursos/video', $data);
             }
@@ -270,6 +271,15 @@ class Recursos_controller extends Profe_controller
         $data['isadmin'] = $this->ion_auth->in_group("admin");
         $this->load->view('login/navbar-private', $data);
         $this->load->view('recursos/link_video');
+    }
+
+    public function recurs_pissarra()
+    {
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/pissarra');
     }
 
     public function recursosgrocery()
