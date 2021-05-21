@@ -2,9 +2,6 @@
 <script src="https://cdn.tiny.cloud/1/e2tgnbfthwd0opuvogjvl20bqeeaw4m2a3nf2pefrq6kefh6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-
-
     <!-- Content Row -->
     <div class="row">
         <div class="container">
@@ -13,12 +10,10 @@
                     <!-- Nested Row within Card Body -->
                     <div class="row">
                         <div class="col-lg-5 d-none d-lg-block bg-recurs-image"></div>
-
                         <div class="col-lg-7">
-
                             <div class="p-5">
-                                <div style="text-align: center; margin-top: -5%">
-                                    <button type="button" class="btn btn-outline-info" onclick="location.href='<?php echo base_url(); ?>recurs/formrecursos'"><i class="far fa-calendar-plus"></i>&nbsp;Crear Recurs</button>
+                                <div style="margin-left: 71%;  margin-top: -7%">
+                                    <button type="button" class="btn btn-outline-info" onclick="location.href='<?php echo base_url(); ?>recurs/formrecursos'"><i class="far fa-calendar-plus"></i>&nbsp;Menu Recursos</button>
                                 </div>
                                 <div class="text-center" style="margin-top: 2%;">
                                     <h1 class="h4 text-gray-900 mb-4"><i class="fab fa-youtube"></i>&nbsp;Link Video</h1>

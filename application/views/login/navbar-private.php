@@ -102,8 +102,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Rol: Professor</h6>
                         <a class="collapse-item" href="<?php echo base_url('login/profile'); ?>">Perfil</a>
-                        <a class="collapse-item" href="<?php echo base_url('recurs/formrecurs'); ?>">Crear Recurs</a>
-                        <a class="collapse-item" href="<?php echo base_url('recurs/formrecursos'); ?>">Crear Recurs 2</a>
+                        <a class="collapse-item" href="<?php echo base_url('recurs/formrecursos'); ?>">Crear Recurs</a>
                         <a class="collapse-item" href="<?php echo base_url('recurs/recursosgrocery'); ?>">Modificar Recurs</a>
                         <!--<a class="collapse-item" href="register.html">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
@@ -126,7 +125,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Rol: ADMIN</h6>
                         <a class="collapse-item" href="<?php echo base_url('login/profile'); ?>">Perfil</a>
-                        <a class="collapse-item" href="<?php echo base_url('recurs/formrecurs'); ?>">Crear Recurs</a>
+                        <a class="collapse-item" href="<?php echo base_url('recurs/formrecursos'); ?>">Crear Recurs</a>
                         <a class="collapse-item" href="<?php echo base_url('users/usersgrocery'); ?>">Gestioanar Usuaris</a>
                         <a class="collapse-item" href="<?php echo base_url('users/users_groupgrocery'); ?>">Gestioanar Grups</a>
                         <a class="collapse-item" href="<?php echo base_url('recursos/recursosgrocery'); ?>">Gestionar Recursos</a>

@@ -2,16 +2,9 @@
 <script src="https://cdn.tiny.cloud/1/e2tgnbfthwd0opuvogjvl20bqeeaw4m2a3nf2pefrq6kefh6/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <button type="button" class="btn btn-outline-info" onclick="location.href='<?php echo base_url(); ?>recurs/formrecursos'"><i class="far fa-calendar-plus"></i>&nbsp;Crear Recurs</button>
-    </div>
-
     <!-- Content Row -->
     <div class="row">
-
         <div class="container">
-
             <div class="card o-hidden border-0 shadow-lg my-5">
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
@@ -19,7 +12,10 @@
                         <div class="col-lg-5 d-none d-lg-block bg-recurs-image"></div>
                         <div class="col-lg-7">
                             <div class="p-5">
-                            <?php echo $this->session->flashdata('ok');  ?>
+                                <div style="margin-left: 71%;  margin-top: -7%">
+                                    <button type="button" class="btn btn-outline-info" onclick="location.href='<?php echo base_url(); ?>recurs/formrecursos'"><i class="far fa-calendar-plus"></i>&nbsp;Menu Recursos</button>
+                                </div>
+                                <?php echo $this->session->flashdata('ok');  ?>
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4"><i class="fas fa-images"></i>&nbsp;Infografia</h1>
                                 </div>

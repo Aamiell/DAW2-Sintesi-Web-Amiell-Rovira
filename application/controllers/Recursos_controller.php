@@ -83,6 +83,9 @@ class Recursos_controller extends Profe_controller
                 $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
                 $this->load->view('recursos/formrecurs', $data);
             }
+
+            $mostrarSortida = false;
+
             for ($i = 1; $i <= 3; $i++) {
                 if (isset($_FILES["adjunts" . $i]) && $_FILES["adjunts" . $i]["name"] != null) {
                     $config['upload_path']          = "./uploads";
@@ -100,9 +103,13 @@ class Recursos_controller extends Profe_controller
                         $user = $this->ion_auth->user()->row();
                         $data['error'] = "";
                         $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
-                        $this->load->view('recursos/formrecurs', $data);
+                        $mostrarSortida = true;
                     }
                 }
+            }
+
+            if ($mostrarSortida) {
+                $this->load->view('recursos/formrecurs', $data);
             }
             //Si la creat anar a la url del recurs
             //http://localhost/sintesi/index.php/recursos/recursosgrocery/read/32
@@ -165,8 +172,34 @@ class Recursos_controller extends Profe_controller
                 $id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
                 $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
                 $this->load->view('recursos/infografia', $data);
-
             }
+        }
+        $mostrarSortida = false;
+
+        for ($i = 1; $i <= 3; $i++) {
+            if (isset($_FILES["adjunts" . $i]) && $_FILES["adjunts" . $i]["name"] != null) {
+                $config['upload_path']          = "./uploads";
+                $config['allowed_types']        = 'gif|jpg|png|jpeg|docx|xlsx|pptx|odt|ods|odp|pdf';
+                $config['encrypt_name'] = true;
+                $this->upload->initialize($config);
+                if (!$this->upload->do_upload("adjunts" . $i)) {
+                    $error = array('error' => $this->upload->display_errors());
+                    $this->load->view('recursos/formrecurs', $error);
+                } else {
+                    $data = array('info_fichero' => $this->upload->data());
+                    $nom = $data['info_fichero']['file_name'];
+                    $extensio = $data['info_fichero']['file_ext'];
+                    $tamany = $data['info_fichero']['file_size'];
+                    $user = $this->ion_auth->user()->row();
+                    $data['error'] = "";
+                    $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
+                    $mostrarSortida = true;
+                }
+            }
+        }
+
+        if ($mostrarSortida) {
+            $this->load->view('recursos/formrecursos', $data);
         }
     }
 

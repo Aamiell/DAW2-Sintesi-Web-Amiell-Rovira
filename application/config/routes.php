@@ -81,7 +81,7 @@ $route['users/users_groupgrocery/(:any)'] = 'grocery_controller/users_groupgroce
 $route['users/users_groupgrocery/(:any)/(:any)'] = 'grocery_controller/users_groupgrocery/$1/$2';
 
 // Routes per crear els recursos
-$route['recurs/formrecurs'] = 'recursos_controller/formrecurs';
+//$route['recurs/formrecurs'] = 'recursos_controller/formrecurs';
 
 $route['recurs/formrecursos'] = 'recursos_controller/formrecursos';
 $route['recurs/infografia'] = 'recursos_controller/recurs_infografia';
