@@ -6,11 +6,15 @@ class Logins_controller extends CI_Controller //Private_controller
     {
         parent::__construct();
 
-        $this->load->model('prova_model');
+        $this->load->model('prova_model');  
         $this->load->helper('url_helper');
         $this->load->library('session');
         $this->load->library('ion_auth');
+<<<<<<< Updated upstream
         $this->load->helper('form');
+=======
+        $this->load->helper('form');    
+>>>>>>> Stashed changes
         $this->load->library('form_validation');
         $this->load->library('grocery_CRUD');
     }
@@ -18,7 +22,6 @@ class Logins_controller extends CI_Controller //Private_controller
     public function login()
     {
         $this->load->view('login/login');
-
         $identity = $this->input->post('user');
         $password = $this->input->post('pass');
 
