@@ -9,7 +9,7 @@ class Grocery_controller extends Admin_controller
         $this->load->model('prova_model');
         $this->load->helper('url_helper');
         $this->load->library('session');
-        $this->load->library('ion_auth');
+        $this->load->library('ion_auth'); 
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->library('grocery_CRUD');
