@@ -10,12 +10,7 @@ class Logins_controller extends CI_Controller //Private_controller
         $this->load->helper('url_helper');
         $this->load->library('session');
         $this->load->library('ion_auth');
-<<<<<<< Updated upstream
-        $this->load->helper('form');
-=======
-        $this->load->helper('form');    
->>>>>>> Stashed changes
-        $this->load->library('form_validation');
+
         $this->load->library('grocery_CRUD');
     }
 
