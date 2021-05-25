@@ -11,21 +11,21 @@ class Recursos_model extends CI_Model
     }
 
 
-    public function set_recurs($user)
-    {
-        $this->load->helper('url');
+    // public function set_recurs($user)
+    // {
+    //     $this->load->helper('url');
 
-        $data = array(
-            'tipus_recurs' => $this->input->post('recurs'),
-            'titol' => $this->input->post('titol'),
-            'descripcio' => $this->input->post('descripcio'),
-            'explicacio' => $this->input->post('explicacio'),
-            'propietari' => $user
-        );
+    //     $data = array(
+    //         'tipus_recurs' => $this->input->post('recurs'),
+    //         'titol' => $this->input->post('titol'),
+    //         'descripcio' => $this->input->post('descripcio'),
+    //         'explicacio' => $this->input->post('explicacio'),
+    //         'propietari' => $user
+    //     );
 
-        $this->db->insert('recursos', $data);
-        return $this->db->insert_id();
-    }
+    //     $this->db->insert('recursos', $data);
+    //     return $this->db->insert_id();
+    // }
 
     public function get_fills ($catid)
     {
@@ -63,6 +63,23 @@ class Recursos_model extends CI_Model
             'titol' => $this->input->post('titol'),
             'descripcio' => $this->input->post('descripcio'),
             'explicacio' => $this->input->post('explicacio'),
+            'propietari' => $user
+        );
+
+        $this->db->insert('recursos', $data);
+        return $this->db->insert_id();
+    }
+
+    public function set_recurs_link($user)
+    {
+        $this->load->helper('url');
+        $tipus= 'link_video';
+        $data = array(
+            'tipus_recurs' => $tipus,
+            'titol' => $this->input->post('titol'),
+            'descripcio' => $this->input->post('descripcio'),
+            'explicacio' => $this->input->post('explicacio'),
+            'link' => $this->input->post('link'),
             'propietari' => $user
         );
 

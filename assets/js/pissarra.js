@@ -33,9 +33,16 @@ class PhotoCanvas {
         this.canvas.addEventListener("mousemove", this.crearcanvas);
         this.canvas.addEventListener("click", this.ClickRatoli);
         let br = document.createElement("br");
+
         let btlinea = document.createElement("button");
+        btlinea.type = "button";
+        //btlinea.class = "btn btn-outline-info";
         let btcercle = document.createElement("button");
+        btcercle.type = "button";
+        let btpcercle = document.createElement("button");
+        btpcercle.type = "button";
         let btborrar = document.createElement("button");
+        btborrar.type = "button";
         let selgruix = document.createElement("input");
         selgruix.type = "number";
         selgruix.id = "numgruix";
@@ -55,17 +62,22 @@ class PhotoCanvas {
         btlinea.appendChild(node1);
         let node2 = document.createTextNode("CERCLE");
         btcercle.appendChild(node2);
+        let node4 = document.createTextNode("CERCLE PINTAT");
+        btpcercle.appendChild(node4);
         let node3 = document.createTextNode("BORRAR");
         btborrar.appendChild(node3);
+
 
         // associem l'esdeveniment click a les funcios de FormaLinea, FormaCercle
         btlinea.addEventListener("click", this.FormaLinea);
         btcercle.addEventListener("click", this.FormaCercle);
+        btpcercle.addEventListener("click", this.FormaPintarCercle);
         btborrar.addEventListener("click", this.borrardibuix);
 
         container.appendChild(br); // afegim el salt de linea  a la jerarquia d'objectes
         container.appendChild(btlinea); // afegim el botó a la jerarquia d'objectes
         container.appendChild(btcercle); // afegim el botó a la jerarquia d'objectes
+        container.appendChild(btpcercle); // afegim el botó a la jerarquia d'objectes
         container.appendChild(selgruix); // afegim el botó a la jerarquia d'objectes
         container.appendChild(selcolor); // afegim el botó a la jerarquia d'objectes
         container.appendChild(btborrar); // afegim el botó a la jerarquia d'objectes
@@ -134,6 +146,11 @@ class PhotoCanvas {
         this.forma = "cercle";
     }
 
+    FormaPintarCercle() {
+        //Si le hem donat al boto de linea la variable forma te el valor linea
+        this.forma = "pintarcercle";
+    }
+
     dibuixar() {
         //Si hem donat click a linea
         if (this.forma == "linea") {
@@ -152,12 +169,25 @@ class PhotoCanvas {
             //Tanquem el pintar
             this.ctx.closePath();
             //Si hem donat click a cercle
-        } else {
+        } else if (this.forma == "cercle") {
             this.ctx.beginPath();
             //Establim el gruix amb la variable creada
             this.ctx.lineWidth = document.getElementById("numgruix").value;
             //Establim el color amb la variable creada
             this.ctx.strokeStyle = document.getElementById("selcolor").value;
+            let r = Math.sqrt((this.guardarcoords.x - this.finalcoords.x) * (this.guardarcoords.x - this.finalcoords.x) + (this.guardarcoords.y - this.finalcoords.y) * (this.guardarcoords.y - this.finalcoords.y));
+            this.ctx.arc(this.guardarcoords.x, this.guardarcoords.y, r, 0, 2 * Math.PI);
+            //Pintem
+            this.ctx.stroke();
+            //Tanquem el pintar
+            this.ctx.closePath();
+        } else if (this.forma == "pintarcercle") {
+            this.ctx.beginPath();
+            //Establim el gruix amb la variable creada
+            this.ctx.lineWidth = document.getElementById("numgruix").value;
+            //Establim el color amb la variable creada
+            this.ctx.strokeStyle = document.getElementById("selcolor").value;
+            //this.ctx.fillStyle = document.getElementById("selcolor").value;
             let r = Math.sqrt((this.guardarcoords.x - this.finalcoords.x) * (this.guardarcoords.x - this.finalcoords.x) + (this.guardarcoords.y - this.finalcoords.y) * (this.guardarcoords.y - this.finalcoords.y));
             this.ctx.arc(this.guardarcoords.x, this.guardarcoords.y, r, 0, 2 * Math.PI);
             //Pintem

@@ -31,16 +31,17 @@ class Treecat_controller  extends CI_Controller
 
     public function mostrar_tree($categories)
     {
-        echo "<ol>";
+        
+        echo "<ul>";
 
         foreach ($categories as $cat) {
-            echo "<li>" . $cat['nom'] . "</li>";
+            echo "<li>". $cat['nom'] . "</li>";
 
             $fills = $this->treecat_model->get_fills($cat['id']);
 
             if (count($fills) > 0)
                 $this->mostrar_tree($fills);
         }
-        echo "</ol>";
+        echo "</ul>";
     }
 }

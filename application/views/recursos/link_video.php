@@ -15,6 +15,7 @@
                                 <div style="margin-left: 71%;  margin-top: -7%">
                                     <button type="button" class="btn btn-outline-info" onclick="location.href='<?php echo base_url(); ?>recurs/formrecursos'"><i class="far fa-calendar-plus"></i>&nbsp;Menu Recursos</button>
                                 </div>
+                                <?php echo $this->session->flashdata('ok');  ?>
                                 <div class="text-center" style="margin-top: 2%;">
                                     <h1 class="h4 text-gray-900 mb-4"><i class="fab fa-youtube"></i>&nbsp;Link Video</h1>
                                 </div>
@@ -29,7 +30,7 @@
                                         language: 'ca',
                                     });
                                 </script>
-                                <form class="user" action="<?php echo base_url('recurs/formrecurs') ?>" enctype="multipart/form-data" method="POST">
+                                <form class="user" action="<?php echo base_url('recurs/link_video') ?>" enctype="multipart/form-data" method="POST">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="link" id="link" placeholder="Link Video...">
                                     </div>
@@ -46,6 +47,14 @@
                                         <textarea type="textarea" class="form-control" name="descripcio" id="descripcio" placeholder="Descripcio..."></textarea>
                                     </div>
                                     <textarea type="textarea" id="explicacio" name="explicacio" placeholder="Explicacio..."></textarea>
+                                    <br>
+                                    <b>Categoria: </b>
+                                    <?php
+                                    echo "<select>";
+                                    echo "<hr>";
+                                    $controller->mostrar_categories($cat);
+                                    echo "</select>";
+                                    ?>
                                     <br>
                                     <b>TAGS: </b>
                                     <br>

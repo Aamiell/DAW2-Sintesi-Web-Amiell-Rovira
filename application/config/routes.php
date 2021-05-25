@@ -87,7 +87,7 @@ $route['recurs/formrecursos'] = 'recursos_controller/formrecursos';
 $route['recurs/infografia'] = 'recursos_controller/recurs_infografia';
 $route['recurs/pissarra'] = 'recursos_controller/recurs_pissarra';
 $route['recurs/video'] = 'recursos_controller/recurs_video';
-$route['recurs/link_video'] = 'recursos_controller/recurs_link_video';
+$route['recurs/link_video'] = 'recursos_controller/recurs_link';
 
 $route['recurs/recursosgrocery'] = 'recursos_controller/recursosgrocery';
 $route['recurs/recursosgrocery/(:any)'] = 'recursos_controller/recursosgrocery/$1';

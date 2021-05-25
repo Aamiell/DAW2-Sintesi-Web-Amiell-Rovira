@@ -49,6 +49,16 @@
                                     </div>
                                     <textarea type="textarea" id="explicacio" name="explicacio" placeholder="Explicacio..."></textarea>
                                     <br>
+                                    <b>Categoria: </b>
+                                    <?php
+                                    echo "<select>";
+                                    echo "<hr>";
+                                    $controller->mostrar_categories($cat);
+                                    echo "</select>";
+                                    ?>
+                                    <br>
+                                    <b>TAGS: </b>
+                                    <br>
                                     <?php $query = $this->db->get('tags');
                                     foreach ($query->result() as $row) { ?>
                                         <input type="checkbox" id="tag" name="tag[]" value="<?php echo $row->nom; ?>"> <label for="tag" id="taglabel"> <?php echo $row->nom; ?></label><br>

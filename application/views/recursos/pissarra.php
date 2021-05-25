@@ -29,7 +29,7 @@
                                         language: 'ca',
                                     });
                                 </script>
-                                <form class="user" action="<?php echo base_url('recurs/formrecurs') ?>" enctype="multipart/form-data" method="POST">
+                                <form class="user" action="<?php echo base_url('recurs/pissara') ?>" enctype="multipart/form-data" method="POST">
                                     <script src="<?php echo base_url('assets/js/pissarra.js'); ?>"></script>
                                     <div id="cuadrediv"></div>
                                     <script>
@@ -49,6 +49,14 @@
                                         <textarea type="textarea" class="form-control" name="descripcio" id="descripcio" placeholder="Descripcio..."></textarea>
                                     </div>
                                     <textarea type="textarea" id="explicacio" name="explicacio" placeholder="Explicacio..."></textarea>
+                                    <br>
+                                    <b>Categoria: </b>
+                                    <?php
+                                    echo "<select>";
+                                    echo "<hr>";
+                                    $controller->mostrar_categories($cat);
+                                    echo "</select>";
+                                    ?>
                                     <br>
                                     <b>TAGS: </b>
                                     <br>
