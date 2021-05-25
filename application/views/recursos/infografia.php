@@ -50,6 +50,9 @@
                                     </div>
                                     <textarea type="textarea" id="explicacio" name="explicacio" placeholder="Explicacio..."></textarea>
                                     <br>
+                                    <b>Categoria: </b>
+                                    
+                                    <br>
                                     <?php $query = $this->db->get('tags');
                                     foreach ($query->result() as $row) { ?>
                                         <input type="checkbox" id="tag" name="tag[]" value="<?php echo $row->nom; ?>"> <label for="tag" id="taglabel"> <?php echo $row->nom; ?></label><br>

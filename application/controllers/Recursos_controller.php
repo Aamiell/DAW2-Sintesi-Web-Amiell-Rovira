@@ -154,10 +154,9 @@ class Recursos_controller extends Profe_controller
         } else {
             $user = $this->ion_auth->user()->row();
             $id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
-            mkdir('./uploads/' . $id_recurs, 0777);
-
-            //$config['upload_path']          = './uploads/';
-            $config['upload_path']          = './uploads/' . $id_recurs;
+            mkdir('../../uploads/' . $id_recurs);
+            mkdir('../../uploads/' . $id_recurs . '/'. 'adjunts');
+            $config['upload_path']          = '../../uploads/' . $id_recurs;
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['encrypt_name'] = true;
             $this->upload->initialize($config);
@@ -181,7 +180,7 @@ class Recursos_controller extends Profe_controller
 
         for ($i = 1; $i <= 3; $i++) {
             if (isset($_FILES["adjunts" . $i]) && $_FILES["adjunts" . $i]["name"] != null) {
-                $config['upload_path']          = "./uploads";
+                $config['upload_path']          = '../../uploads/' . $id_recurs . '/'. 'adjunts';
                 $config['allowed_types']        = 'gif|jpg|png|jpeg|docx|xlsx|pptx|odt|ods|odp|pdf';
                 $config['encrypt_name'] = true;
                 $this->upload->initialize($config);

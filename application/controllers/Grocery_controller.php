@@ -45,11 +45,13 @@ class Grocery_controller extends Admin_controller
         $crud->field_type('remember_code', 'hidden');
         $crud->field_type('company', 'hidden');
         $crud->field_type('phone', 'hidden');
+        $crud->field_type('password', 'hidden');
 
         $crud->display_as('first_name', 'Nom');
         $crud->display_as('last_name', 'Cognom');
         $crud->display_as('username', 'Usuari');
         $crud->display_as('email', 'Email');
+
 
         $crud->change_field_type('id', 'invisible');
         $crud->change_field_type('active', 'invisible');
@@ -80,6 +82,7 @@ class Grocery_controller extends Admin_controller
         $crud->set_table('users_groups');
 
         $crud->unset_clone();
+        $crud->unset_delete();
 
         $crud->change_field_type('id', 'invisible');
 
@@ -117,7 +120,6 @@ class Grocery_controller extends Admin_controller
         $crud->change_field_type('id', 'invisible');
 
         $crud->unset_clone();
-
         $output = $crud->render();
         $this->_render_output($output);
     }
