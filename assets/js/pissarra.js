@@ -25,7 +25,7 @@ class PhotoCanvas {
 
         // creeem el canvas y els tres botons y el dos inputs
         this.canvas = document.createElement("canvas");
-        this.canvas.width = "550";
+        this.canvas.width = "525";
         this.canvas.height = "300";
         this.canvas.style = "border:1px solid #000000";
         this.canvas.style.backgroundColor = "#386E53";
