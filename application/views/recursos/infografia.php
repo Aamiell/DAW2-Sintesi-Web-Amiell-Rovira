@@ -51,7 +51,12 @@
                                     <textarea type="textarea" id="explicacio" name="explicacio" placeholder="Explicacio..."></textarea>
                                     <br>
                                     <b>Categoria: </b>
-                                    
+                                    <?php
+                                    echo "<select>";
+                                    echo "<hr>";
+                                    $controller->mostrar_categories($cat);
+                                    echo "</select>";
+                                    ?>
                                     <br>
                                     <?php $query = $this->db->get('tags');
                                     foreach ($query->result() as $row) { ?>

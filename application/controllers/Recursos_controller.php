@@ -123,11 +123,25 @@ class Recursos_controller extends Profe_controller
         $this->load->view('recursos/formrecursos');
     }
 
+    public function mostrar_categories($categories)
+    {
+        foreach ($categories as $cat) {
+            echo "<option>" . $cat['nom'] . "</option>";
+
+            $fills = $this->recursos_model->get_fills($cat['id']);
+
+            if (count($fills) > 0)
+                $this->mostrar_categories($fills);
+        }
+    }
+
     public function recurs_infografia()
     {
         $data['isalumne'] = $this->ion_auth->in_group("alumne");
         $data['isprofe'] = $this->ion_auth->in_group("profe");
         $data['isadmin'] = $this->ion_auth->in_group("admin");
+        $data['controller'] = $this;
+        $data["cat"] = $this->recursos_model->get_fills(NULL);
         $this->load->view('login/navbar-private', $data);
 
         $this->form_validation->set_rules(
@@ -155,7 +169,7 @@ class Recursos_controller extends Profe_controller
             $user = $this->ion_auth->user()->row();
             $id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
             mkdir('../../uploads/' . $id_recurs);
-            mkdir('../../uploads/' . $id_recurs . '/'. 'adjunts');
+            mkdir('../../uploads/' . $id_recurs . '/' . 'adjunts');
             $config['upload_path']          = '../../uploads/' . $id_recurs;
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['encrypt_name'] = true;
@@ -180,7 +194,7 @@ class Recursos_controller extends Profe_controller
 
         for ($i = 1; $i <= 3; $i++) {
             if (isset($_FILES["adjunts" . $i]) && $_FILES["adjunts" . $i]["name"] != null) {
-                $config['upload_path']          = '../../uploads/' . $id_recurs . '/'. 'adjunts';
+                $config['upload_path']          = '../../uploads/' . $id_recurs . '/' . 'adjunts';
                 $config['allowed_types']        = 'gif|jpg|png|jpeg|docx|xlsx|pptx|odt|ods|odp|pdf';
                 $config['encrypt_name'] = true;
                 $this->upload->initialize($config);

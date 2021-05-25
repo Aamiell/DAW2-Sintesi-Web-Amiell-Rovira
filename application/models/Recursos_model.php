@@ -27,6 +27,17 @@ class Recursos_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    public function get_fills ($catid)
+    {
+        $data = array(
+            'pare' => $catid
+        );
+
+        $query = $this->db->get_where('treecat', $data);
+        
+        return $query->result_array();
+    }
+
     public function set_recurs_infografia($user)
     {
         $this->load->helper('url');

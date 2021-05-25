@@ -31,6 +31,15 @@
                                 </script>
                                 <form class="user" action="<?php echo base_url('recurs/formrecurs') ?>" enctype="multipart/form-data" method="POST">
                                     <b>Arxiu recurs: </b>
+
+                                    <script src="<?php echo base_url('assets/js/pissarra.js'); ?>"></script>
+                                    <div id="cuadrediv"></div>
+                                    <script>
+                                        var canvas = new PhotoCanvas("cuadrediv");
+                                    </script>
+
+
+
                                     <br>
                                     <input type="file" name="arxiu" id="arxiu" size="20" />
                                     <br><br>
