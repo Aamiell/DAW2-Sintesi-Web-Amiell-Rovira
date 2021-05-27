@@ -47,6 +47,9 @@ class Recursos_model extends CI_Model
             'titol' => $this->input->post('titol'),
             'descripcio' => $this->input->post('descripcio'),
             'explicacio' => $this->input->post('explicacio'),
+            'categoria' => $this->input->post('cat'),
+            'tipus_access' => $this->input->post('tipus_access'),
+            'codi_invitacio' => $this->input->post('codi'),
             'propietari' => $user
         );
 
@@ -63,6 +66,9 @@ class Recursos_model extends CI_Model
             'titol' => $this->input->post('titol'),
             'descripcio' => $this->input->post('descripcio'),
             'explicacio' => $this->input->post('explicacio'),
+            'categoria' => $this->input->post('cat'),
+            'tipus_access' => $this->input->post('tipus_access'),
+            'codi_invitacio' => $this->input->post('codi'),
             'propietari' => $user
         );
 
@@ -80,6 +86,29 @@ class Recursos_model extends CI_Model
             'descripcio' => $this->input->post('descripcio'),
             'explicacio' => $this->input->post('explicacio'),
             'link' => $this->input->post('link'),
+            'categoria' => $this->input->post('cat'),
+            'tipus_access' => $this->input->post('tipus_access'),
+            'codi_invitacio' => $this->input->post('codi'),
+            'propietari' => $user
+        );
+
+        $this->db->insert('recursos', $data);
+        return $this->db->insert_id();
+    }
+
+    public function set_recurs_pissarra($user)
+    {
+        $this->load->helper('url');
+        $tipus= 'lpissarra';
+        $data = array(
+            'tipus_recurs' => $tipus,
+            'titol' => $this->input->post('titol'),
+            'descripcio' => $this->input->post('descripcio'),
+            'explicacio' => $this->input->post('explicacio'),
+            'pissarra' => $this->input->post('pissarra'),
+            'categoria' => $this->input->post('cat'),
+            'tipus_access' => $this->input->post('tipus_access'),
+            'codi_invitacio' => $this->input->post('codi'),
             'propietari' => $user
         );
 

@@ -21,6 +21,7 @@ class PhotoCanvas {
         this.ClickRatoli = this.ClickRatoli.bind(this);
         this.FormaLinea = this.FormaLinea.bind(this);
         this.FormaCercle = this.FormaCercle.bind(this);
+        this.FormaPintarCercle = this.FormaPintarCercle.bind(this);
         this.borrardibuix = this.borrardibuix.bind(this);
 
         // creeem el canvas y els tres botons y el dos inputs
@@ -64,7 +65,7 @@ class PhotoCanvas {
         btcercle.appendChild(node2);
         let node4 = document.createTextNode("CERCLE PINTAT");
         btpcercle.appendChild(node4);
-        let node3 = document.createTextNode("BORRAR");
+        let node3 = document.createTextNode("BORRAR TOT");
         btborrar.appendChild(node3);
 
 
@@ -187,9 +188,10 @@ class PhotoCanvas {
             this.ctx.lineWidth = document.getElementById("numgruix").value;
             //Establim el color amb la variable creada
             this.ctx.strokeStyle = document.getElementById("selcolor").value;
-            //this.ctx.fillStyle = document.getElementById("selcolor").value;
+            this.ctx.fillStyle = document.getElementById("selcolor").value;
             let r = Math.sqrt((this.guardarcoords.x - this.finalcoords.x) * (this.guardarcoords.x - this.finalcoords.x) + (this.guardarcoords.y - this.finalcoords.y) * (this.guardarcoords.y - this.finalcoords.y));
             this.ctx.arc(this.guardarcoords.x, this.guardarcoords.y, r, 0, 2 * Math.PI);
+            this.ctx.fill();
             //Pintem
             this.ctx.stroke();
             //Tanquem el pintar
