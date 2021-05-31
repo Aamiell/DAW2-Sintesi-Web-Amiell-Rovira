@@ -15,8 +15,8 @@ class PhotoCanvas {
         sinó el this actual (el this actual fa referència a l'objecte de la classe) */
         this.crearcanvas = this.crearcanvas.bind(this);
         this.actualitzarCoords = this.actualitzarCoords.bind(this);
-        this.marcarCoords = this.marcarCoords.bind(this);
-        this.limpiarCoords = this.limpiarCoords.bind(this);
+        //this.marcarCoords = this.marcarCoords.bind(this);
+        //this.limpiarCoords = this.limpiarCoords.bind(this);
         this.oMousePos = this.oMousePos.bind(this);
         this.ClickRatoli = this.ClickRatoli.bind(this);
         this.FormaLinea = this.FormaLinea.bind(this);
@@ -89,8 +89,8 @@ class PhotoCanvas {
             this.ctx = this.canvas.getContext("2d");
             if (this.ctx) {
                 //Creem un rectangle blanc per ficar les coordenades
-                this.ctx.fillStyle = "#fff";
-                this.ctx.fillRect(1, 1, 180, 50);
+                //this.ctx.fillStyle = "#fff";
+                //this.ctx.fillRect(1, 1, 180, 50);
                 //Si entrem amb el ratoli ens envia a actualitzarCoords 
                 this.canvas.addEventListener("mousemove", this.actualitzarCoords);
                 //Si surtim amb el ratoli ens envia a llimpiarCoords
@@ -105,29 +105,29 @@ class PhotoCanvas {
         this.marcarCoords(this.mousePos.x, this.mousePos.y)
     }
 
-    marcarCoords(x, y) {
-        // Creem un caudre blanc
-        this.ctx.beginPath();
-        //Definim el color de la lletra
-        this.ctx.fillStyle = "#fff";
-        this.ctx.fillRect(1, 1, 180, 50);
-        //Creem el text de color negre y el tipus de lletra per ficar les coordenades
-        this.ctx.fillStyle = "red";
-        this.ctx.font = "15px Arial";
-        //Les coordenades
-        this.ctx.fillText("Coords: " + "x: " + x + ", y: " + y, 20, 30);
-        //Tanquem el pintar
-        this.ctx.closePath();
-    }
+    // marcarCoords(x, y) {
+    //     // Creem un caudre blanc
+    //     this.ctx.beginPath();
+    //     //Definim el color de la lletra
+    //     this.ctx.fillStyle = "#fff";
+    //     this.ctx.fillRect(1, 1, 180, 50);
+    //     //Creem el text de color negre y el tipus de lletra per ficar les coordenades
+    //     this.ctx.fillStyle = "red";
+    //     this.ctx.font = "15px Arial";
+    //     //Les coordenades
+    //     this.ctx.fillText("Coords: " + "x: " + x + ", y: " + y, 20, 30);
+    //     //Tanquem el pintar
+    //     this.ctx.closePath();
+    // }
 
-    limpiarCoords() {
-        this.output.innerHTML = "";
-        this.output.style.top = 0 + "px";
-        this.output.style.left = 0 + "px";
-        this.output.style.backgroundColor = "transparent"
-        this.output.style.border = "none";
-        this.canvas.style.cursor = "default";
-    }
+    // limpiarCoords() {
+    //     this.output.innerHTML = "";
+    //     this.output.style.top = 0 + "px";
+    //     this.output.style.left = 0 + "px";
+    //     this.output.style.backgroundColor = "transparent"
+    //     this.output.style.border = "none";
+    //     this.canvas.style.cursor = "default";
+    // }
 
     oMousePos(evt) {
         var ClientRect = this.canvas.getBoundingClientRect();

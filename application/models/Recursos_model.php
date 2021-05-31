@@ -27,21 +27,21 @@ class Recursos_model extends CI_Model
     //     return $this->db->insert_id();
     // }
 
-    public function get_fills ($catid)
+    public function get_fills($catid)
     {
         $data = array(
             'pare' => $catid
         );
 
         $query = $this->db->get_where('treecat', $data);
-        
+
         return $query->result_array();
     }
 
     public function set_recurs_infografia($user)
     {
         $this->load->helper('url');
-        $tipus= 'infografia';
+        $tipus = 'infografia';
         $data = array(
             'tipus_recurs' => $tipus,
             'titol' => $this->input->post('titol'),
@@ -60,7 +60,7 @@ class Recursos_model extends CI_Model
     public function set_recurs_video($user)
     {
         $this->load->helper('url');
-        $tipus= 'video';
+        $tipus = 'video';
         $data = array(
             'tipus_recurs' => $tipus,
             'titol' => $this->input->post('titol'),
@@ -79,7 +79,7 @@ class Recursos_model extends CI_Model
     public function set_recurs_link($user)
     {
         $this->load->helper('url');
-        $tipus= 'link_video';
+        $tipus = 'link_video';
         $data = array(
             'tipus_recurs' => $tipus,
             'titol' => $this->input->post('titol'),
@@ -99,7 +99,7 @@ class Recursos_model extends CI_Model
     public function set_recurs_pissarra($user)
     {
         $this->load->helper('url');
-        $tipus= 'lpissarra';
+        $tipus = 'lpissarra';
         $data = array(
             'tipus_recurs' => $tipus,
             'titol' => $this->input->post('titol'),
@@ -128,5 +128,11 @@ class Recursos_model extends CI_Model
         );
 
         return $this->db->insert('fitxers', $data);
+    }
+
+    public function get_recursos($catid)
+    {
+        $query = $this->db->query("select * from RECURSOS where categoria='".$catid."'");
+        return $query->result_array();
     }
 }

@@ -68,6 +68,9 @@ $route['login/changepass'] = "users_controller/changepass";
 $route['login/changepass_update'] = "users_controller/changepass_update";
 $route['login/profile'] = "users_controller/profile";
 
+
+$route['recursos/(:num)'] = "Recursos_controller/recursos_categoria/$1";
+
 //Routa per mostrar les categories
 $route['tree/category'] = 'treecat_controller/index'; 
 

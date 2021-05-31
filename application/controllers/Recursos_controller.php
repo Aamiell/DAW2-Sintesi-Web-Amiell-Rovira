@@ -28,10 +28,8 @@ class Recursos_controller extends Profe_controller
     public function mostrar_categories($categories)
     {
         foreach ($categories as $cat) {
-            echo "<option>" . $cat['nom'] . "</option>";
-
+            echo "<option value='" . $cat['id'] . "'>" . $cat['nom'] . "</option>";
             $fills = $this->recursos_model->get_fills($cat['id']);
-
             if (count($fills) > 0)
                 $this->mostrar_categories($fills);
         }
@@ -92,7 +90,7 @@ class Recursos_controller extends Profe_controller
                 $tamany = $data['info_fichero']['file_size'];
                 //$user = $this->ion_auth->user()->row();
                 $data['error'] = "";
-                $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -5%;" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
+                $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -8%; width: 70%" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
                 //$id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
                 $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
                 //$this->load->view('recursos/infografia', $data);
@@ -181,7 +179,7 @@ class Recursos_controller extends Profe_controller
                 $tamany = $data['info_fichero']['file_size'];
                 //$user = $this->ion_auth->user()->row();
                 $data['error'] = "";
-                $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -5%;" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
+                $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -8%; width: 70%" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
                 //$id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
                 $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
                 //$this->load->view('recursos/infografia', $data);
@@ -258,7 +256,7 @@ class Recursos_controller extends Profe_controller
         } else {
             $user = $this->ion_auth->user()->row();
             $data['error'] = "";
-            $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -5%;" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
+            $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -8%; width: 70%" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
             $id_recurs = $this->recursos_model->set_recurs_link($user->username);
             mkdir('../../uploads/' . $id_recurs);
             mkdir('../../uploads/' . $id_recurs . '/' . 'adjunts');
@@ -325,7 +323,7 @@ class Recursos_controller extends Profe_controller
         } else {
             $user = $this->ion_auth->user()->row();
             $data['error'] = "";
-            $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -5%;" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
+            $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -8%; width: 70%" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
             $id_recurs = $this->recursos_model->set_recurs_pissarra($user->username);
             //$this->load->view('recursos/link_video', $data);
             mkdir('../../uploads/' . $id_recurs);
@@ -391,5 +389,21 @@ class Recursos_controller extends Profe_controller
     {
 
         $this->load->view('recursos/recursos', (array)$output);
+    }
+
+
+    public function recursos_categoria($cat)
+    {
+        $this->load->view('templates/footer');
+        
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+
+        $recursos = $this->recursos_model->get_recursos($cat);
+
+        $data['recursos'] = $recursos;
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/list_recursos', $data);
     }
 }
