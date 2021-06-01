@@ -14,6 +14,7 @@ class Recursos_controller extends Profe_controller
         $this->load->library('form_validation');
         $this->load->library('grocery_CRUD');
         $this->load->library('upload');
+        $this->load->helper('download');
     }
 
     public function formrecursos()
@@ -86,13 +87,15 @@ class Recursos_controller extends Profe_controller
             } else {
                 $data = array('info_fichero' => $this->upload->data());
                 $nom = $data['info_fichero']['file_name'];
+                $nom_original = $data['info_fichero']['client_name'];
                 $extensio = $data['info_fichero']['file_ext'];
                 $tamany = $data['info_fichero']['file_size'];
+                $fitxer = 1;
                 //$user = $this->ion_auth->user()->row();
                 $data['error'] = "";
                 $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -8%; width: 70%" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
                 //$id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
-                $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
+                $this->recursos_model->set_fitxer($nom,$nom_original, $extensio, $tamany, $id_recurs, $fitxer);
                 //$this->load->view('recursos/infografia', $data);
             }
         }
@@ -110,11 +113,13 @@ class Recursos_controller extends Profe_controller
                 } else {
                     $data = array('info_fichero' => $this->upload->data());
                     $nom = $data['info_fichero']['file_name'];
+                    $nom_original = $data['info_fichero']['client_name'];
                     $extensio = $data['info_fichero']['file_ext'];
                     $tamany = $data['info_fichero']['file_size'];
+                    $fitxer = 0;
                     $user = $this->ion_auth->user()->row();
                     $data['error'] = "";
-                    $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
+                    $this->recursos_model->set_fitxer($nom,$nom_original, $extensio, $tamany, $id_recurs, $fitxer);
                 }
             }
         }
@@ -175,13 +180,15 @@ class Recursos_controller extends Profe_controller
             } else {
                 $data = array('info_fichero' => $this->upload->data());
                 $nom = $data['info_fichero']['file_name'];
+                $nom_original = $data['info_fichero']['client_name'];
                 $extensio = $data['info_fichero']['file_ext'];
                 $tamany = $data['info_fichero']['file_size'];
+                $fitxer =1;
                 //$user = $this->ion_auth->user()->row();
                 $data['error'] = "";
                 $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -8%; width: 70%" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
                 //$id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
-                $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
+                $this->recursos_model->set_fitxer($nom, $nom_original, $extensio, $tamany, $id_recurs, $fitxer);
                 //$this->load->view('recursos/infografia', $data);
             }
         }
@@ -199,11 +206,13 @@ class Recursos_controller extends Profe_controller
                 } else {
                     $data = array('info_fichero' => $this->upload->data());
                     $nom = $data['info_fichero']['file_name'];
+                    $nom_original = $data['info_fichero']['client_name'];
                     $extensio = $data['info_fichero']['file_ext'];
                     $tamany = $data['info_fichero']['file_size'];
+                    $fitxer = 0;
                     $user = $this->ion_auth->user()->row();
                     $data['error'] = "";
-                    $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
+                    $this->recursos_model->set_fitxer($nom, $nom_original, $extensio, $tamany, $id_recurs, $fitxer);
                 }
             }
         }
@@ -275,11 +284,12 @@ class Recursos_controller extends Profe_controller
                 } else {
                     $data = array('info_fichero' => $this->upload->data());
                     $nom = $data['info_fichero']['file_name'];
+                    $nom_original = $data['info_fichero']['client_name'];
                     $extensio = $data['info_fichero']['file_ext'];
                     $tamany = $data['info_fichero']['file_size'];
                     $user = $this->ion_auth->user()->row();
                     $data['error'] = "";
-                    $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
+                    $this->recursos_model->set_fitxer($nom, $nom_original, $extensio, $tamany, $id_recurs);
                 }
             }
         }
@@ -342,11 +352,12 @@ class Recursos_controller extends Profe_controller
                 } else {
                     $data = array('info_fichero' => $this->upload->data());
                     $nom = $data['info_fichero']['file_name'];
+                    $nom_original = $data['info_fichero']['client_name'];
                     $extensio = $data['info_fichero']['file_ext'];
                     $tamany = $data['info_fichero']['file_size'];
                     $user = $this->ion_auth->user()->row();
                     $data['error'] = "";
-                    $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
+                    $this->recursos_model->set_fitxer($nom, $nom_original, $extensio, $tamany, $id_recurs);
                 }
             }
         }
@@ -391,11 +402,10 @@ class Recursos_controller extends Profe_controller
         $this->load->view('recursos/recursos', (array)$output);
     }
 
-
     public function recursos_categoria($cat)
     {
         $this->load->view('templates/footer');
-        
+
         $data['isalumne'] = $this->ion_auth->in_group("alumne");
         $data['isprofe'] = $this->ion_auth->in_group("profe");
         $data['isadmin'] = $this->ion_auth->in_group("admin");
@@ -405,5 +415,96 @@ class Recursos_controller extends Profe_controller
         $data['recursos'] = $recursos;
         $this->load->view('login/navbar-private', $data);
         $this->load->view('recursos/list_recursos', $data);
+    }
+
+    public function mostrar_infografia($id)
+    {
+        $this->load->view('templates/footer');
+
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+
+        $recursos = $this->recursos_model->get_recursos_id($id);
+        $adjunts = $this->recursos_model->get_fitxer_adjunts($id);
+        $arxiu = $this->recursos_model->get_fitxer_principal($id);
+
+        $data['recursos'] = $recursos;
+        $data['adjunts'] = $adjunts;
+        $data['arxiu'] = $arxiu;
+        $data['id_recurs'] = $id;
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/mostrar_infografia', $data);
+    }
+
+    public function mostrar_video($id)
+    {
+        $this->load->view('templates/footer');
+
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+
+        $recursos = $this->recursos_model->get_recursos_id($id);
+        $adjunts = $this->recursos_model->get_fitxer_adjunts($id);
+        $arxiu = $this->recursos_model->get_fitxer_principal($id);
+
+        $data['recursos'] = $recursos;
+        $data['adjunts'] = $adjunts;
+        $data['arxiu'] = $arxiu;
+        $data['id_recurs'] = $id;
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/mostrar_video', $data);
+    }
+
+    public function mostrar_link_video($id)
+    {
+        $this->load->view('templates/footer');
+
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+        
+        $recursos = $this->recursos_model->get_recursos_id($id);
+        $adjunts = $this->recursos_model->get_fitxer_adjunts($id);
+
+        $data['recursos'] = $recursos;
+        $data['adjunts'] = $adjunts;
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/mostrar_link_video', $data);
+    }
+
+    public function mostrar_pissarra($id)
+    {
+        $this->load->view('templates/footer');
+
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+
+        $recursos = $this->recursos_model->get_recursos_id($id);
+        $adjunts = $this->recursos_model->get_fitxer_adjunts($id);
+
+        $data['recursos'] = $recursos;
+        $data['adjunts'] = $adjunts;
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/mostrar_infografia', $data);
+    }
+/*
+    recurs/2/arxiu105 
+    mostrar l'arxiu amb codi 23 de la carpeta de recursos del recurs numero 2
+
+    $route['recurs/(:num)/arxiu(:num)'] = "recursos_controller/veure_arxiu/$1/$2";
+*/
+    public function veure_arxiu_principal($id_recurs) {
+        //mirar el nom de l'arxiu $id_fitxer dins de la base de dades
+        $arxiu = $this->recursos_model->get_fitxer_principal($id_recurs);
+        force_download('../../uploads/' . $id_recurs . '/'. $arxiu['nom'], NULL);
+    }
+
+    public function veure_arxius_adjunts($id_recurs) {
+        //mirar el nom de l'arxiu $id_fitxer dins de la base de dades
+        $arxiu = $this->recursos_model->get_arxius_adjunts($id_recurs);
+        force_download('../../uploads/'. $id_recurs . '/adjunts/'. $arxiu['nom'], NULL);
     }
 }

@@ -10,19 +10,27 @@
     <tbody>
         <?php foreach ($recursos as $recursos_item) : ?>
             <tr>
-            <td><?php  echo $recursos_item['tipus_recurs']; ?></td>
-                <td><?php  echo $recursos_item['titol']; ?></td>
+                <td><?php echo $recursos_item['tipus_recurs']; ?></td>
+                <td><?php echo $recursos_item['titol']; ?></td>
                 <td><?php echo $recursos_item['descripcio']; ?></td>
                 <td>
-                    <!-- <div class="btn-group dropleft"> -->
-                        <button type="button" class="btn btn-outline-info"><i class="far fa-eye"></i>&nbsp;Veure</button>
-                        <!-- <div class="dropdown-menu">
-                            <a class="dropdown-item" href="<?php //echo base_url('news/view/' . $recursos_item['slug']); ?>"><i class="far fa-eye"></i>&nbsp;Veure</a>
-                            <a class="dropdown-item" href="<?php //echo base_url('news/delete/' . $news_item['slug']); ?>"><i class="far fa-trash-alt"></i>&nbsp;Eliminar</a>
-                            <a class="dropdown-item" href="<?php //echo base_url('news/modificar/' . $news_item['slug']);; ?>"><i class="far fa-edit"></i>&nbsp;Modificar</a>
-                            <a class="dropdown-item" href="<?php //echo base_url('news/pdf/' . $news_item['slug']);; ?>"><i class="fas fa-file-pdf"></i>&nbsp;Descargar PDF</a>
-                        </div> -->
-                    <!-- </div> -->
+                    <?php if ($recursos_item['tipus_recurs'] == 'infografia') { ?>
+                        <a class="btn btn-outline-info" href="<?php echo base_url('recursos/mostrar_infografia/' . $recursos_item['id']); ?>"><i class="far fa-eye"></i>&nbsp;Veure</a>
+                        <!-- <button type="button" class="btn btn-outline-info" href="<?php //echo base_url('recursos/mostrar_youtube/' . $recursos_item['id']); 
+                                                                                        ?>"> <i class="far fa-eye"></i>&nbsp;Veure</button> -->
+                    <?php } elseif ($recursos_item['tipus_recurs'] == 'video') { ?>
+                        <a class="btn btn-outline-info" href="<?php echo base_url('recursos/mostrar_video/' . $recursos_item['id']); ?>"><i class="far fa-eye"></i>&nbsp;Veure</a>
+                        <!-- <button type="button" class="btn btn-outline-info" href="<?php //echo base_url('recursos/mostrar_pizarra/' . $recursos_item['id']); 
+                                                                                        ?>"> <i class="far fa-eye"></i>&nbsp;Veure</button> -->
+                    <?php } elseif ($recursos_item['tipus_recurs'] == 'link_video') { ?>
+                        <a class="btn btn-outline-info" href="<?php echo base_url('recursos/mostrar_link_video/' . $recursos_item['id']); ?>"><i class="far fa-eye"></i>&nbsp;Veure</a>
+                        <!-- <button type="button" class="btn btn-outline-info" href="<?php //echo base_url('recursos/mostrar_infografia/' . $recursos_item['id']); 
+                                                                                        ?>"> <i class="far fa-eye"></i>&nbsp;Veure</button> -->
+                    <?php } elseif ($recursos_item['tipus_recurs'] == 'pissarra') { ?>
+                        <a class="btn btn-outline-info" href="<?php echo base_url('recursos/mostrar_pissarra/' . $recursos_item['id']); ?>"><i class="far fa-eye"></i>&nbsp;Veure</a>
+                        <!-- <button type="button" class="btn btn-outline-info" href="<?php //echo base_url('recursos/mostrar_infografia/' . $recursos_item['id']); 
+                                                                                        ?>"> <i class="far fa-eye"></i>&nbsp;Veure</button> -->
+                    <?php } ?>
                 </td>
             </tr>
         <?php endforeach; ?>

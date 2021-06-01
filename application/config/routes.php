@@ -69,8 +69,6 @@ $route['login/changepass_update'] = "users_controller/changepass_update";
 $route['login/profile'] = "users_controller/profile";
 
 
-$route['recursos/(:num)'] = "Recursos_controller/recursos_categoria/$1";
-
 //Routa per mostrar les categories
 $route['tree/category'] = 'treecat_controller/index'; 
 
@@ -91,6 +89,18 @@ $route['recurs/infografia'] = 'recursos_controller/recurs_infografia';
 $route['recurs/pissarra'] = 'recursos_controller/recurs_pissarra';
 $route['recurs/video'] = 'recursos_controller/recurs_video';
 $route['recurs/link_video'] = 'recursos_controller/recurs_link';
+
+$route['recursos/(:num)'] = "recursos_controller/recursos_categoria/$1";
+$route['recursos/mostrar_infografia/(:num)'] = "recursos_controller/mostrar_infografia/$1";
+$route['recursos/mostrar_video/(:num)'] = "recursos_controller/mostrar_video/$1";
+$route['recursos/mostrar_link_video/(:num)'] = "recursos_controller/mostrar_link_video/$1";
+$route['recursos/mostrar_pissarra/(:num)'] = "recursos_controller/mostrar_pissarra/$1";
+/*
+    recurs/2/arxiu23 
+    mostrar l'arxiu amb codi 23 de la carpeta de recursos del recurs numero 2
+*/
+$route['recurs/(:num)'] = "recursos_controller/veure_arxiu_principal/$1";
+$route['recurs/arxius/(:num)'] = "recursos_controller/veure_arxius_adjunts/$1";
 
 $route['recurs/recursosgrocery'] = 'recursos_controller/recursosgrocery';
 $route['recurs/recursosgrocery/(:any)'] = 'recursos_controller/recursosgrocery/$1';

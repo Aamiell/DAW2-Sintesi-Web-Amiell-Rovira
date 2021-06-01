@@ -116,15 +116,17 @@ class Recursos_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function set_fitxer($nom, $extensio, $tamany, $id_recurs)
+    public function set_fitxer($nom,$nom_original, $extensio, $tamany, $id_recurs, $fitxer)
     {
         $this->load->helper('url');
 
         $data = array(
             'extensio' => $extensio,
             'nom' => $nom,
+            'nom_original' => $nom_original,
             'tamany_bytes' => $tamany,
-            'id_recurs' => $id_recurs
+            'id_recurs' => $id_recurs,
+            'fitxer_principal' => $fitxer
         );
 
         return $this->db->insert('fitxers', $data);
@@ -134,5 +136,29 @@ class Recursos_model extends CI_Model
     {
         $query = $this->db->query("select * from RECURSOS where categoria='".$catid."'");
         return $query->result_array();
+    }
+
+    public function get_recursos_id($id)
+    {
+        $query = $this->db->get_where('recursos', array('id' => $id));
+        return $query->row_array();
+    }
+
+    public function get_fitxer_adjunts($id)
+    {
+        $query = $this->db->get_where('fitxers', array('id_recurs' => $id, 'fitxer_principal'=> '0'));
+        return $query->result_array();
+    }
+    
+    public function get_fitxer_principal($id)
+    {
+        $query = $this->db->get_where('fitxers', array('id_recurs' => $id, 'fitxer_principal'=> '1'));
+        return $query->row_array();
+    }
+
+    public function get_arxius_adjunts($id)
+    {
+        $query = $this->db->get_where('fitxers', array('id_recurs' => $id, 'fitxer_principal'=> '0'));
+        return $query->row_array();
     }
 }
