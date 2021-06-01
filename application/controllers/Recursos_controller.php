@@ -289,7 +289,8 @@ class Recursos_controller extends Profe_controller
                     $tamany = $data['info_fichero']['file_size'];
                     $user = $this->ion_auth->user()->row();
                     $data['error'] = "";
-                    $this->recursos_model->set_fitxer($nom, $nom_original, $extensio, $tamany, $id_recurs);
+                    $fitxer = 0;
+                    $this->recursos_model->set_fitxer($nom, $nom_original, $extensio, $tamany, $id_recurs, $fitxer);
                 }
             }
         }
@@ -464,12 +465,15 @@ class Recursos_controller extends Profe_controller
         $data['isalumne'] = $this->ion_auth->in_group("alumne");
         $data['isprofe'] = $this->ion_auth->in_group("profe");
         $data['isadmin'] = $this->ion_auth->in_group("admin");
-        
+
         $recursos = $this->recursos_model->get_recursos_id($id);
         $adjunts = $this->recursos_model->get_fitxer_adjunts($id);
+        $arxiu = $this->recursos_model->get_fitxer_principal($id);
 
         $data['recursos'] = $recursos;
         $data['adjunts'] = $adjunts;
+        $data['arxiu'] = $arxiu;
+        $data['id_recurs'] = $id;
         $this->load->view('login/navbar-private', $data);
         $this->load->view('recursos/mostrar_link_video', $data);
     }
