@@ -411,7 +411,7 @@ class Recursos_controller extends Profe_controller
         $data['isprofe'] = $this->ion_auth->in_group("profe");
         $data['isadmin'] = $this->ion_auth->in_group("admin");
 
-        $recursos = $this->recursos_model->get_recursos($cat);
+        $recursos = $this->recursos_model->get_recursos_cat($cat);
 
         $data['recursos'] = $recursos;
         $this->load->view('login/navbar-private', $data);
@@ -506,9 +506,9 @@ class Recursos_controller extends Profe_controller
         force_download('../../uploads/' . $id_recurs . '/'. $arxiu['nom'], NULL);
     }
 
-    public function veure_arxius_adjunts($id_recurs) {
+    public function veure_arxius_adjunts($id_recurs, $id_arxiu) {
         //mirar el nom de l'arxiu $id_fitxer dins de la base de dades
-        $arxiu = $this->recursos_model->get_arxius_adjunts($id_recurs);
+        $arxiu = $this->recursos_model->get_nom_arxius_adjunt($id_arxiu);
         force_download('../../uploads/'. $id_recurs . '/adjunts/'. $arxiu['nom'], NULL);
     }
 }

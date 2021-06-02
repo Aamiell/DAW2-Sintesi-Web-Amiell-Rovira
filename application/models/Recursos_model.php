@@ -116,7 +116,7 @@ class Recursos_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function set_fitxer($nom,$nom_original, $extensio, $tamany, $id_recurs, $fitxer)
+    public function set_fitxer($nom, $nom_original, $extensio, $tamany, $id_recurs, $fitxer)
     {
         $this->load->helper('url');
 
@@ -132,9 +132,9 @@ class Recursos_model extends CI_Model
         return $this->db->insert('fitxers', $data);
     }
 
-    public function get_recursos($catid)
+    public function get_recursos_cat($catid)
     {
-        $query = $this->db->query("select * from RECURSOS where categoria='".$catid."'");
+        $query = $this->db->query("select * from RECURSOS where categoria='" . $catid . "'");
         return $query->result_array();
     }
 
@@ -146,19 +146,37 @@ class Recursos_model extends CI_Model
 
     public function get_fitxer_adjunts($id)
     {
-        $query = $this->db->get_where('fitxers', array('id_recurs' => $id, 'fitxer_principal'=> '0'));
+        $query = $this->db->get_where('fitxers', array('id_recurs' => $id, 'fitxer_principal' => '0'));
         return $query->result_array();
     }
-    
+
     public function get_fitxer_principal($id)
     {
-        $query = $this->db->get_where('fitxers', array('id_recurs' => $id, 'fitxer_principal'=> '1'));
+        $query = $this->db->get_where('fitxers', array('id_recurs' => $id, 'fitxer_principal' => '1'));
         return $query->row_array();
     }
 
     public function get_arxius_adjunts($id)
     {
-        $query = $this->db->get_where('fitxers', array('id_recurs' => $id, 'fitxer_principal'=> '0'));
+        $query = $this->db->get_where('fitxers', array('id_recurs' => $id, 'fitxer_principal' => '0'));
         return $query->row_array();
+    }
+    public function get_nom_arxius_adjunt($id)
+    {
+        $query = $this->db->get_where('fitxers', array('id' => $id));
+        return $query->row_array();
+    }
+
+
+    public function delete_recurs($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('recursos');
+    }
+
+    public function get_recursos()
+    {
+        $query = $this->db->get('recursos');
+        return $query->result_array();
     }
 }

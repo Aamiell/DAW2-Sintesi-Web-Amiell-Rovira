@@ -100,7 +100,7 @@ $route['recursos/mostrar_pissarra/(:num)'] = "recursos_controller/mostrar_pissar
     mostrar l'arxiu amb codi 23 de la carpeta de recursos del recurs numero 2
 */
 $route['recurs/(:num)'] = "recursos_controller/veure_arxiu_principal/$1";
-$route['recurs/arxius/(:num)'] = "recursos_controller/veure_arxius_adjunts/$1";
+$route['recurs/arxius/(:num)/adjunts/(:num)'] = "recursos_controller/veure_arxius_adjunts/$1/$2";
 
 $route['recurs/recursosgrocery'] = 'recursos_controller/recursosgrocery';
 $route['recurs/recursosgrocery/(:any)'] = 'recursos_controller/recursosgrocery/$1';
@@ -114,6 +114,8 @@ $route['tags/tagsgrocery'] = 'grocery_controller/tagsgrocery';
 $route['tags/tagsgrocery/(:any)'] = 'grocery_controller/tagsgrocery/$1';
 $route['tags/tagsgrocery/(:any)/(:any)'] = 'grocery_controller/tagsgrocery/$1/$2';
 
-$route['upload/do_upload'] = 'upload_controller/do_upload';
-$route['upload'] = 'upload_controller/index';
 
+//API
+$route['api_private/recursos/login'] = 'jwtapi_controller/login';
+$route['api_private/recursos'] = 'jwtapi_controller/recursos';
+$route['api_private/recurs/(:any)'] = 'jwtapi_controller/recurs/$1';
