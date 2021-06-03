@@ -14,13 +14,40 @@ class Recursos_controller extends Profe_controller
         $this->load->library('form_validation');
         $this->load->library('grocery_CRUD');
         $this->load->library('upload');
+        $this->load->helper('download');
     }
 
-    public function formrecurs()
+    public function formrecursos()
     {
         $data['isalumne'] = $this->ion_auth->in_group("alumne");
         $data['isprofe'] = $this->ion_auth->in_group("profe");
         $data['isadmin'] = $this->ion_auth->in_group("admin");
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/formrecursos');
+    }
+
+    public function mostrar_categories($categories)
+    {
+        foreach ($categories as $cat) {
+            echo "<option value='" . $cat['id'] . "'>" . $cat['nom'] . "</option>";
+            $fills = $this->recursos_model->get_fills($cat['id']);
+            if (count($fills) > 0)
+                $this->mostrar_categories($fills);
+        }
+    }
+
+    public function recurs_infografia()
+    {
+
+        $errorArxiuPrincipal = false;
+        $errorArxiusAdjunts = false;
+        $errorFormulari = false;
+
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+        $data['controller'] = $this;
+        $data["cat"] = $this->recursos_model->get_fills(NULL);
         $this->load->view('login/navbar-private', $data);
 
         $this->form_validation->set_rules(
@@ -41,101 +68,240 @@ class Recursos_controller extends Profe_controller
             'required',
             array('required' => 'Omple el camp Explicacio')
         );
-        /*$this->form_validation->set_rules(
-            'recurs',
-            'Recurs',
-            'required',
-            array('required' => 'Selecciona un tipus de video recurs')
-        );*/
-        /*         $this->form_validation->set_rules(
-            'tags',
-            'Tags',
-            'required',
-            array('required' => 'Omple el camp tags')
-        ); */
-
         if ($this->form_validation->run() === FALSE) {
             $data['error'] = "";
-            $this->load->view('recursos/formrecurs', $data);
+            $errorFormulari = false;
         } else {
-            if ($this->input->post("recurs") == "infografia") {
-                $config['upload_path']          = "./uploads";
-                $config['allowed_types']        = 'gif|jpg|png|jpeg';
-                $config['encrypt_name'] = true;
-                $this->upload->initialize($config);
-            } else if ($this->input->post("recurs") == "video") {
-                $config['upload_path']          = "./uploads";
-                $config['allowed_types']        = 'mp4|avi|mkv|flv';
-                $config['encrypt_name'] = true;
-                $this->upload->initialize($config);
-            }
+            $user = $this->ion_auth->user()->row();
+            $id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
+            mkdir('../../uploads/' . $id_recurs);
+            mkdir('../../uploads/' . $id_recurs . '/' . 'adjunts');
+            $config['upload_path']          = '../../uploads/' . $id_recurs;
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['encrypt_name'] = true;
+            $this->upload->initialize($config);
+
             if (!$this->upload->do_upload('arxiu')) {
                 $error = array('error' => $this->upload->display_errors());
-                $this->load->view('recursos/formrecurs', $error);
+                $errorArxiuPrincipal = true;
             } else {
                 $data = array('info_fichero' => $this->upload->data());
                 $nom = $data['info_fichero']['file_name'];
+                $nom_original = $data['info_fichero']['client_name'];
                 $extensio = $data['info_fichero']['file_ext'];
                 $tamany = $data['info_fichero']['file_size'];
-                $user = $this->ion_auth->user()->row();
+                $fitxer = 1;
+                //$user = $this->ion_auth->user()->row();
                 $data['error'] = "";
-                $id_recurs = $this->recursos_model->set_recurs($user->username);
-                $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
-                $this->load->view('recursos/formrecurs', $data);
+                $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -8%; width: 70%" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
+                //$id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
+                $this->recursos_model->set_fitxer($nom,$nom_original, $extensio, $tamany, $id_recurs, $fitxer);
+                //$this->load->view('recursos/infografia', $data);
             }
+        }
 
-            $mostrarSortida = false;
 
-            for ($i = 1; $i <= 3; $i++) {
-                if (isset($_FILES["adjunts" . $i]) && $_FILES["adjunts" . $i]["name"] != null) {
-                    $config['upload_path']          = "./uploads";
-                    $config['allowed_types']        = 'gif|jpg|png|jpeg|docx|xlsx|pptx|odt|ods|odp|pdf';
-                    $config['encrypt_name'] = true;
-                    $this->upload->initialize($config);
-                    if (!$this->upload->do_upload("adjunts" . $i)) {
-                        $error = array('error' => $this->upload->display_errors());
-                        $this->load->view('recursos/formrecurs', $error);
-                    } else {
-                        $data = array('info_fichero' => $this->upload->data());
-                        $nom = $data['info_fichero']['file_name'];
-                        $extensio = $data['info_fichero']['file_ext'];
-                        $tamany = $data['info_fichero']['file_size'];
-                        $user = $this->ion_auth->user()->row();
-                        $data['error'] = "";
-                        $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
-                        $mostrarSortida = true;
-                    }
+        for ($i = 1; $i <= 3; $i++) {
+            if (isset($_FILES["adjunts" . $i]) && $_FILES["adjunts" . $i]["name"] != null) {
+                $config['upload_path']          = '../../uploads/' . $id_recurs . '/' . 'adjunts';
+                $config['allowed_types']        = 'gif|jpg|png|jpeg|docx|xlsx|pptx|odt|ods|odp|pdf';
+                $config['encrypt_name'] = true;
+                $this->upload->initialize($config);
+                if (!$this->upload->do_upload("adjunts" . $i)) {
+                    $error = array('error' => $this->upload->display_errors());
+                    $errorArxiusAdjunts = true;
+                } else {
+                    $data = array('info_fichero' => $this->upload->data());
+                    $nom = $data['info_fichero']['file_name'];
+                    $nom_original = $data['info_fichero']['client_name'];
+                    $extensio = $data['info_fichero']['file_ext'];
+                    $tamany = $data['info_fichero']['file_size'];
+                    $fitxer = 0;
+                    $user = $this->ion_auth->user()->row();
+                    $data['error'] = "";
+                    $this->recursos_model->set_fitxer($nom,$nom_original, $extensio, $tamany, $id_recurs, $fitxer);
                 }
             }
-
-            if ($mostrarSortida) {
-                $this->load->view('recursos/formrecurs', $data);
-            }
+        }
+        if ($errorArxiuPrincipal || $errorArxiusAdjunts || $errorFormulari) {
+            $this->load->view('recursos/infografia', $error);
+        } else {
+            $this->load->view('recursos/infografia', $data);
         }
     }
 
-    public function formrecursos()
+    public function recurs_video()
     {
+        $errorArxiuPrincipal = false;
+        $errorArxiusAdjunts = false;
+        $errorFormulari = false;
+
         $data['isalumne'] = $this->ion_auth->in_group("alumne");
         $data['isprofe'] = $this->ion_auth->in_group("profe");
         $data['isadmin'] = $this->ion_auth->in_group("admin");
+        $data['controller'] = $this;
+        $data["cat"] = $this->recursos_model->get_fills(NULL);
         $this->load->view('login/navbar-private', $data);
-        $this->load->view('recursos/formrecursos');
+
+        $this->form_validation->set_rules(
+            'titol',
+            'Titol',
+            'required',
+            array('required' => 'Omple el camp Titol')
+        );
+        $this->form_validation->set_rules(
+            'descripcio',
+            'Descripcio',
+            'required',
+            array('required' => 'Omple el camp Descripcio')
+        );
+        $this->form_validation->set_rules(
+            'explicacio',
+            'Explicacio',
+            'required',
+            array('required' => 'Omple el camp Explicacio')
+        );
+        if ($this->form_validation->run() === FALSE) {
+            $data['error'] = "";
+            $errorFormulari = false;
+        } else {
+            $user = $this->ion_auth->user()->row();
+            $id_recurs = $this->recursos_model->set_recurs_video($user->username);
+            mkdir('../../uploads/' . $id_recurs);
+            mkdir('../../uploads/' . $id_recurs . '/' . 'adjunts');
+            $config['upload_path']          = '../../uploads/' . $id_recurs;
+            $config['allowed_types']        = 'mp4|avi|mkv|mov';
+            $config['encrypt_name'] = true;
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload('arxiu')) {
+                $error = array('error' => $this->upload->display_errors());
+                $errorArxiuPrincipal = true;
+            } else {
+                $data = array('info_fichero' => $this->upload->data());
+                $nom = $data['info_fichero']['file_name'];
+                $nom_original = $data['info_fichero']['client_name'];
+                $extensio = $data['info_fichero']['file_ext'];
+                $tamany = $data['info_fichero']['file_size'];
+                $fitxer =1;
+                //$user = $this->ion_auth->user()->row();
+                $data['error'] = "";
+                $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -8%; width: 70%" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
+                //$id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
+                $this->recursos_model->set_fitxer($nom, $nom_original, $extensio, $tamany, $id_recurs, $fitxer);
+                //$this->load->view('recursos/infografia', $data);
+            }
+        }
+
+
+        for ($i = 1; $i <= 3; $i++) {
+            if (isset($_FILES["adjunts" . $i]) && $_FILES["adjunts" . $i]["name"] != null) {
+                $config['upload_path']          = '../../uploads/' . $id_recurs . '/' . 'adjunts';
+                $config['allowed_types']        = 'gif|jpg|png|jpeg|docx|xlsx|pptx|odt|ods|odp|pdf';
+                $config['encrypt_name'] = true;
+                $this->upload->initialize($config);
+                if (!$this->upload->do_upload("adjunts" . $i)) {
+                    $error = array('error' => $this->upload->display_errors());
+                    $errorArxiusAdjunts = true;
+                } else {
+                    $data = array('info_fichero' => $this->upload->data());
+                    $nom = $data['info_fichero']['file_name'];
+                    $nom_original = $data['info_fichero']['client_name'];
+                    $extensio = $data['info_fichero']['file_ext'];
+                    $tamany = $data['info_fichero']['file_size'];
+                    $fitxer = 0;
+                    $user = $this->ion_auth->user()->row();
+                    $data['error'] = "";
+                    $this->recursos_model->set_fitxer($nom, $nom_original, $extensio, $tamany, $id_recurs, $fitxer);
+                }
+            }
+        }
+        if ($errorArxiuPrincipal || $errorArxiusAdjunts || $errorFormulari) {
+            $this->load->view('recursos/video', $error);
+        } else {
+            $this->load->view('recursos/video', $data);
+        }
     }
-
-    public function mostrar_categories($categories)
+    public function recurs_link()
     {
-        foreach ($categories as $cat) {
-            echo "<option>" . $cat['nom'] . "</option>";
 
-            $fills = $this->recursos_model->get_fills($cat['id']);
+        $errorArxiusAdjunts = false;
+        $errorFormulari = false;
 
-            if (count($fills) > 0)
-                $this->mostrar_categories($fills);
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+        $data['controller'] = $this;
+        $data["cat"] = $this->recursos_model->get_fills(NULL);
+        $this->load->view('login/navbar-private', $data);
+
+        $this->form_validation->set_rules(
+            'link',
+            'Link',
+            'required',
+            array('required' => 'Omple el camp Link')
+        );
+        $this->form_validation->set_rules(
+            'titol',
+            'Titol',
+            'required',
+            array('required' => 'Omple el camp Titol')
+        );
+        $this->form_validation->set_rules(
+            'descripcio',
+            'Descripcio',
+            'required',
+            array('required' => 'Omple el camp Descripcio')
+        );
+        $this->form_validation->set_rules(
+            'explicacio',
+            'Explicacio',
+            'required',
+            array('required' => 'Omple el camp Explicacio')
+        );
+        if ($this->form_validation->run() === FALSE) {
+            $data['error'] = "";
+            $errorFormulari = false;
+        } else {
+            $user = $this->ion_auth->user()->row();
+            $data['error'] = "";
+            $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -8%; width: 70%" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
+            $id_recurs = $this->recursos_model->set_recurs_link($user->username);
+            mkdir('../../uploads/' . $id_recurs);
+            mkdir('../../uploads/' . $id_recurs . '/' . 'adjunts');
+            //$this->load->view('recursos/link_video', $data);
+        }
+
+        for ($i = 1; $i <= 3; $i++) {
+            if (isset($_FILES["adjunts" . $i]) && $_FILES["adjunts" . $i]["name"] != null) {
+                $config['upload_path']          = '../../uploads/' . $id_recurs . '/' . 'adjunts';
+                $config['allowed_types']        = 'gif|jpg|png|jpeg|docx|xlsx|pptx|odt|ods|odp|pdf';
+                $config['encrypt_name'] = true;
+                $this->upload->initialize($config);
+                if (!$this->upload->do_upload("adjunts" . $i)) {
+                    $error = array('error' => $this->upload->display_errors());
+                    $errorArxiusAdjunts = false;
+                } else {
+                    $data = array('info_fichero' => $this->upload->data());
+                    $nom = $data['info_fichero']['file_name'];
+                    $nom_original = $data['info_fichero']['client_name'];
+                    $extensio = $data['info_fichero']['file_ext'];
+                    $tamany = $data['info_fichero']['file_size'];
+                    $user = $this->ion_auth->user()->row();
+                    $data['error'] = "";
+                    $fitxer = 0;
+                    $this->recursos_model->set_fitxer($nom, $nom_original, $extensio, $tamany, $id_recurs, $fitxer);
+                }
+            }
+        }
+        if ($errorArxiusAdjunts || $errorFormulari) {
+            $this->load->view('recursos/link_video', $error);
+        } else {
+            $this->load->view('recursos/link_video', $data);
         }
     }
 
-    public function recurs_infografia()
+    public function recurs_pissarra()
     {
         $data['isalumne'] = $this->ion_auth->in_group("alumne");
         $data['isprofe'] = $this->ion_auth->in_group("profe");
@@ -164,33 +330,16 @@ class Recursos_controller extends Profe_controller
         );
         if ($this->form_validation->run() === FALSE) {
             $data['error'] = "";
-            $this->load->view('recursos/infografia', $data);
+            $this->load->view('recursos/pissarra', $data);
         } else {
             $user = $this->ion_auth->user()->row();
-            $id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
+            $data['error'] = "";
+            $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -8%; width: 70%" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT</b></div>');
+            $id_recurs = $this->recursos_model->set_recurs_pissarra($user->username);
+            //$this->load->view('recursos/link_video', $data);
             mkdir('../../uploads/' . $id_recurs);
             mkdir('../../uploads/' . $id_recurs . '/' . 'adjunts');
-            $config['upload_path']          = '../../uploads/' . $id_recurs;
-            $config['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config['encrypt_name'] = true;
-            $this->upload->initialize($config);
-            if (!$this->upload->do_upload('arxiu')) {
-                $error = array('error' => $this->upload->display_errors());
-                $this->load->view('recursos/infografia', $error);
-            } else {
-                $data = array('info_fichero' => $this->upload->data());
-                $nom = $data['info_fichero']['file_name'];
-                $extensio = $data['info_fichero']['file_ext'];
-                $tamany = $data['info_fichero']['file_size'];
-                //$user = $this->ion_auth->user()->row();
-                $data['error'] = "";
-                $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -5%;" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT<b></div>');
-                //$id_recurs = $this->recursos_model->set_recurs_infografia($user->username);
-                $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
-                $this->load->view('recursos/infografia', $data);
-            }
         }
-        $mostrarSortida = false;
 
         for ($i = 1; $i <= 3; $i++) {
             if (isset($_FILES["adjunts" . $i]) && $_FILES["adjunts" . $i]["name"] != null) {
@@ -200,96 +349,19 @@ class Recursos_controller extends Profe_controller
                 $this->upload->initialize($config);
                 if (!$this->upload->do_upload("adjunts" . $i)) {
                     $error = array('error' => $this->upload->display_errors());
-                    $this->load->view('recursos/formrecurs', $error);
+                    $this->load->view('recursos/pissarra', $error);
                 } else {
                     $data = array('info_fichero' => $this->upload->data());
                     $nom = $data['info_fichero']['file_name'];
+                    $nom_original = $data['info_fichero']['client_name'];
                     $extensio = $data['info_fichero']['file_ext'];
                     $tamany = $data['info_fichero']['file_size'];
                     $user = $this->ion_auth->user()->row();
                     $data['error'] = "";
-                    $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
-                    $mostrarSortida = true;
+                    $this->recursos_model->set_fitxer($nom, $nom_original, $extensio, $tamany, $id_recurs);
                 }
             }
         }
-        if ($mostrarSortida) {
-            $this->load->view('recursos/formrecursos', $data);
-        }
-    }
-
-    public function recurs_video()
-    {
-        $data['isalumne'] = $this->ion_auth->in_group("alumne");
-        $data['isprofe'] = $this->ion_auth->in_group("profe");
-        $data['isadmin'] = $this->ion_auth->in_group("admin");
-        $this->load->view('login/navbar-private', $data);
-
-        $this->form_validation->set_rules(
-            'titol',
-            'Titol',
-            'required',
-            array('required' => 'Omple el camp Titol')
-        );
-        $this->form_validation->set_rules(
-            'descripcio',
-            'Descripcio',
-            'required',
-            array('required' => 'Omple el camp Descripcio')
-        );
-        $this->form_validation->set_rules(
-            'explicacio',
-            'Explicacio',
-            'required',
-            array('required' => 'Omple el camp Explicacio')
-        );
-        if ($this->form_validation->run() === FALSE) {
-            $data['error'] = "";
-            $this->load->view('recursos/video', $data);
-        } else {
-            $user = $this->ion_auth->user()->row();
-            $id_recurs = $this->recursos_model->set_recurs_video($user->username);
-            mkdir('./uploads/' . $id_recurs, 0777);
-
-            //$config['upload_path']          = './uploads/';
-            $config['upload_path']          = './uploads/' . $id_recurs;
-            $config['allowed_types']        = 'mp4|avi|mkv|flv';
-            $config['encrypt_name'] = true;
-            $this->upload->initialize($config);
-            if (!$this->upload->do_upload('arxiu')) {
-                $error = array('error' => $this->upload->display_errors());
-                $this->load->view('recursos/video', $error);
-            } else {
-                $data = array('info_fichero' => $this->upload->data());
-                $nom = $data['info_fichero']['file_name'];
-                $extensio = $data['info_fichero']['file_ext'];
-                $tamany = $data['info_fichero']['file_size'];
-                //$user = $this->ion_auth->user()->row();
-                $data['error'] = "";
-                $this->session->set_flashdata('ok', '<div style="text-align: center; margin-top: -5%;" class="alert alert-success" role="alert"><b>RECURS GUARDAT CORRECTAMENT<b></div>');
-                //$id_recurs = $this->recursos_model->set_recurs_video($user->username);
-                $this->recursos_model->set_fitxer($nom, $extensio, $tamany, $id_recurs);
-                $this->load->view('recursos/video', $data);
-            }
-        }
-    }
-
-    public function recurs_link_video()
-    {
-        $data['isalumne'] = $this->ion_auth->in_group("alumne");
-        $data['isprofe'] = $this->ion_auth->in_group("profe");
-        $data['isadmin'] = $this->ion_auth->in_group("admin");
-        $this->load->view('login/navbar-private', $data);
-        $this->load->view('recursos/link_video');
-    }
-
-    public function recurs_pissarra()
-    {
-        $data['isalumne'] = $this->ion_auth->in_group("alumne");
-        $data['isprofe'] = $this->ion_auth->in_group("profe");
-        $data['isadmin'] = $this->ion_auth->in_group("admin");
-        $this->load->view('login/navbar-private', $data);
-        $this->load->view('recursos/pissarra');
     }
 
     public function recursosgrocery()
@@ -329,5 +401,114 @@ class Recursos_controller extends Profe_controller
     {
 
         $this->load->view('recursos/recursos', (array)$output);
+    }
+
+    public function recursos_categoria($cat)
+    {
+        $this->load->view('templates/footer');
+
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+
+        $recursos = $this->recursos_model->get_recursos_cat($cat);
+
+        $data['recursos'] = $recursos;
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/list_recursos', $data);
+    }
+
+    public function mostrar_infografia($id)
+    {
+        $this->load->view('templates/footer');
+
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+
+        $recursos = $this->recursos_model->get_recursos_id($id);
+        $adjunts = $this->recursos_model->get_fitxer_adjunts($id);
+        $arxiu = $this->recursos_model->get_fitxer_principal($id);
+
+        $data['recursos'] = $recursos;
+        $data['adjunts'] = $adjunts;
+        $data['arxiu'] = $arxiu;
+        $data['id_recurs'] = $id;
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/mostrar_infografia', $data);
+    }
+
+    public function mostrar_video($id)
+    {
+        $this->load->view('templates/footer');
+
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+
+        $recursos = $this->recursos_model->get_recursos_id($id);
+        $adjunts = $this->recursos_model->get_fitxer_adjunts($id);
+        $arxiu = $this->recursos_model->get_fitxer_principal($id);
+
+        $data['recursos'] = $recursos;
+        $data['adjunts'] = $adjunts;
+        $data['arxiu'] = $arxiu;
+        $data['id_recurs'] = $id;
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/mostrar_video', $data);
+    }
+
+    public function mostrar_link_video($id)
+    {
+        $this->load->view('templates/footer');
+
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+
+        $recursos = $this->recursos_model->get_recursos_id($id);
+        $adjunts = $this->recursos_model->get_fitxer_adjunts($id);
+        $arxiu = $this->recursos_model->get_fitxer_principal($id);
+
+        $data['recursos'] = $recursos;
+        $data['adjunts'] = $adjunts;
+        $data['arxiu'] = $arxiu;
+        $data['id_recurs'] = $id;
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/mostrar_link_video', $data);
+    }
+
+    public function mostrar_pissarra($id)
+    {
+        $this->load->view('templates/footer');
+
+        $data['isalumne'] = $this->ion_auth->in_group("alumne");
+        $data['isprofe'] = $this->ion_auth->in_group("profe");
+        $data['isadmin'] = $this->ion_auth->in_group("admin");
+
+        $recursos = $this->recursos_model->get_recursos_id($id);
+        $adjunts = $this->recursos_model->get_fitxer_adjunts($id);
+
+        $data['recursos'] = $recursos;
+        $data['adjunts'] = $adjunts;
+        $this->load->view('login/navbar-private', $data);
+        $this->load->view('recursos/mostrar_infografia', $data);
+    }
+/*
+    recurs/2/arxiu105 
+    mostrar l'arxiu amb codi 23 de la carpeta de recursos del recurs numero 2
+
+    $route['recurs/(:num)/arxiu(:num)'] = "recursos_controller/veure_arxiu/$1/$2";
+*/
+    public function veure_arxiu_principal($id_recurs) {
+        //mirar el nom de l'arxiu $id_fitxer dins de la base de dades
+        $arxiu = $this->recursos_model->get_fitxer_principal($id_recurs);
+        force_download('../../uploads/' . $id_recurs . '/'. $arxiu['nom'], NULL);
+    }
+
+    public function veure_arxius_adjunts($id_recurs, $id_arxiu) {
+        //mirar el nom de l'arxiu $id_fitxer dins de la base de dades
+        $arxiu = $this->recursos_model->get_nom_arxius_adjunt($id_arxiu);
+        force_download('../../uploads/'. $id_recurs . '/adjunts/'. $arxiu['nom'], NULL);
     }
 }

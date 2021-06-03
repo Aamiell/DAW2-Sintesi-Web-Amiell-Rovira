@@ -15,12 +15,13 @@ class PhotoCanvas {
         sinó el this actual (el this actual fa referència a l'objecte de la classe) */
         this.crearcanvas = this.crearcanvas.bind(this);
         this.actualitzarCoords = this.actualitzarCoords.bind(this);
-        this.marcarCoords = this.marcarCoords.bind(this);
-        this.limpiarCoords = this.limpiarCoords.bind(this);
+        //this.marcarCoords = this.marcarCoords.bind(this);
+        //this.limpiarCoords = this.limpiarCoords.bind(this);
         this.oMousePos = this.oMousePos.bind(this);
         this.ClickRatoli = this.ClickRatoli.bind(this);
         this.FormaLinea = this.FormaLinea.bind(this);
         this.FormaCercle = this.FormaCercle.bind(this);
+        this.FormaPintarCercle = this.FormaPintarCercle.bind(this);
         this.borrardibuix = this.borrardibuix.bind(this);
 
         // creeem el canvas y els tres botons y el dos inputs
@@ -33,9 +34,16 @@ class PhotoCanvas {
         this.canvas.addEventListener("mousemove", this.crearcanvas);
         this.canvas.addEventListener("click", this.ClickRatoli);
         let br = document.createElement("br");
+
         let btlinea = document.createElement("button");
+        btlinea.type = "button";
+        //btlinea.class = "btn btn-outline-info";
         let btcercle = document.createElement("button");
+        btcercle.type = "button";
+        let btpcercle = document.createElement("button");
+        btpcercle.type = "button";
         let btborrar = document.createElement("button");
+        btborrar.type = "button";
         let selgruix = document.createElement("input");
         selgruix.type = "number";
         selgruix.id = "numgruix";
@@ -55,17 +63,22 @@ class PhotoCanvas {
         btlinea.appendChild(node1);
         let node2 = document.createTextNode("CERCLE");
         btcercle.appendChild(node2);
-        let node3 = document.createTextNode("BORRAR");
+        let node4 = document.createTextNode("CERCLE PINTAT");
+        btpcercle.appendChild(node4);
+        let node3 = document.createTextNode("BORRAR TOT");
         btborrar.appendChild(node3);
+
 
         // associem l'esdeveniment click a les funcios de FormaLinea, FormaCercle
         btlinea.addEventListener("click", this.FormaLinea);
         btcercle.addEventListener("click", this.FormaCercle);
+        btpcercle.addEventListener("click", this.FormaPintarCercle);
         btborrar.addEventListener("click", this.borrardibuix);
 
         container.appendChild(br); // afegim el salt de linea  a la jerarquia d'objectes
         container.appendChild(btlinea); // afegim el botó a la jerarquia d'objectes
         container.appendChild(btcercle); // afegim el botó a la jerarquia d'objectes
+        container.appendChild(btpcercle); // afegim el botó a la jerarquia d'objectes
         container.appendChild(selgruix); // afegim el botó a la jerarquia d'objectes
         container.appendChild(selcolor); // afegim el botó a la jerarquia d'objectes
         container.appendChild(btborrar); // afegim el botó a la jerarquia d'objectes
@@ -76,8 +89,8 @@ class PhotoCanvas {
             this.ctx = this.canvas.getContext("2d");
             if (this.ctx) {
                 //Creem un rectangle blanc per ficar les coordenades
-                this.ctx.fillStyle = "#fff";
-                this.ctx.fillRect(1, 1, 180, 50);
+                //this.ctx.fillStyle = "#fff";
+                //this.ctx.fillRect(1, 1, 180, 50);
                 //Si entrem amb el ratoli ens envia a actualitzarCoords 
                 this.canvas.addEventListener("mousemove", this.actualitzarCoords);
                 //Si surtim amb el ratoli ens envia a llimpiarCoords
@@ -92,29 +105,29 @@ class PhotoCanvas {
         this.marcarCoords(this.mousePos.x, this.mousePos.y)
     }
 
-    marcarCoords(x, y) {
-        // Creem un caudre blanc
-        this.ctx.beginPath();
-        //Definim el color de la lletra
-        this.ctx.fillStyle = "#fff";
-        this.ctx.fillRect(1, 1, 180, 50);
-        //Creem el text de color negre y el tipus de lletra per ficar les coordenades
-        this.ctx.fillStyle = "red";
-        this.ctx.font = "15px Arial";
-        //Les coordenades
-        this.ctx.fillText("Coords: " + "x: " + x + ", y: " + y, 20, 30);
-        //Tanquem el pintar
-        this.ctx.closePath();
-    }
+    // marcarCoords(x, y) {
+    //     // Creem un caudre blanc
+    //     this.ctx.beginPath();
+    //     //Definim el color de la lletra
+    //     this.ctx.fillStyle = "#fff";
+    //     this.ctx.fillRect(1, 1, 180, 50);
+    //     //Creem el text de color negre y el tipus de lletra per ficar les coordenades
+    //     this.ctx.fillStyle = "red";
+    //     this.ctx.font = "15px Arial";
+    //     //Les coordenades
+    //     this.ctx.fillText("Coords: " + "x: " + x + ", y: " + y, 20, 30);
+    //     //Tanquem el pintar
+    //     this.ctx.closePath();
+    // }
 
-    limpiarCoords() {
-        this.output.innerHTML = "";
-        this.output.style.top = 0 + "px";
-        this.output.style.left = 0 + "px";
-        this.output.style.backgroundColor = "transparent"
-        this.output.style.border = "none";
-        this.canvas.style.cursor = "default";
-    }
+    // limpiarCoords() {
+    //     this.output.innerHTML = "";
+    //     this.output.style.top = 0 + "px";
+    //     this.output.style.left = 0 + "px";
+    //     this.output.style.backgroundColor = "transparent"
+    //     this.output.style.border = "none";
+    //     this.canvas.style.cursor = "default";
+    // }
 
     oMousePos(evt) {
         var ClientRect = this.canvas.getBoundingClientRect();
@@ -132,6 +145,11 @@ class PhotoCanvas {
     FormaCercle() {
         //Si le hem donat al boto de cercle la variable forma te el valor cercle
         this.forma = "cercle";
+    }
+
+    FormaPintarCercle() {
+        //Si le hem donat al boto de linea la variable forma te el valor linea
+        this.forma = "pintarcercle";
     }
 
     dibuixar() {
@@ -152,7 +170,7 @@ class PhotoCanvas {
             //Tanquem el pintar
             this.ctx.closePath();
             //Si hem donat click a cercle
-        } else {
+        } else if (this.forma == "cercle") {
             this.ctx.beginPath();
             //Establim el gruix amb la variable creada
             this.ctx.lineWidth = document.getElementById("numgruix").value;
@@ -160,6 +178,20 @@ class PhotoCanvas {
             this.ctx.strokeStyle = document.getElementById("selcolor").value;
             let r = Math.sqrt((this.guardarcoords.x - this.finalcoords.x) * (this.guardarcoords.x - this.finalcoords.x) + (this.guardarcoords.y - this.finalcoords.y) * (this.guardarcoords.y - this.finalcoords.y));
             this.ctx.arc(this.guardarcoords.x, this.guardarcoords.y, r, 0, 2 * Math.PI);
+            //Pintem
+            this.ctx.stroke();
+            //Tanquem el pintar
+            this.ctx.closePath();
+        } else if (this.forma == "pintarcercle") {
+            this.ctx.beginPath();
+            //Establim el gruix amb la variable creada
+            this.ctx.lineWidth = document.getElementById("numgruix").value;
+            //Establim el color amb la variable creada
+            this.ctx.strokeStyle = document.getElementById("selcolor").value;
+            this.ctx.fillStyle = document.getElementById("selcolor").value;
+            let r = Math.sqrt((this.guardarcoords.x - this.finalcoords.x) * (this.guardarcoords.x - this.finalcoords.x) + (this.guardarcoords.y - this.finalcoords.y) * (this.guardarcoords.y - this.finalcoords.y));
+            this.ctx.arc(this.guardarcoords.x, this.guardarcoords.y, r, 0, 2 * Math.PI);
+            this.ctx.fill();
             //Pintem
             this.ctx.stroke();
             //Tanquem el pintar

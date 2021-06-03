@@ -29,7 +29,7 @@
                                         language: 'ca',
                                     });
                                 </script>
-                                <form class="user" action="<?php echo base_url('recurs/formrecurs') ?>" enctype="multipart/form-data" method="POST">
+                                <form class="user" action="<?php echo base_url('recurs/pissarra') ?>" enctype="multipart/form-data" method="POST">
                                     <script src="<?php echo base_url('assets/js/pissarra.js'); ?>"></script>
                                     <div id="cuadrediv"></div>
                                     <script>
@@ -50,6 +50,36 @@
                                     </div>
                                     <textarea type="textarea" id="explicacio" name="explicacio" placeholder="Explicacio..."></textarea>
                                     <br>
+                                    <b>Categoria: </b>
+                                    <?php
+                                    echo "<select name='cat' id='cat'>";
+                                    echo "<hr>";
+                                    $controller->mostrar_categories($cat);
+                                    echo "</select>";
+                                    ?>
+                                    <br><br>
+                                    <script>
+                                        function access() {
+                                            var sel = document.getElementById("tipus_access");
+                                            if (sel.value == 'codi_invitacio') {
+                                                document.getElementById('codi').hidden = false;
+                                            } else {
+                                                document.getElementById('codi').hidden = true;
+                                            }
+                                        }
+                                    </script>
+                                    <b>Tipus d'access: </b>
+                                    <select name="tipus_access" id="tipus_access" onchange="access()">
+                                        <option value="grups_usuaris">Grup usuaris</option>
+                                        <option value="perfil_usuaris">Perfil usuaris</option>
+                                        <option value="codi_invitacio">Codi invitació</option>
+                                        <option value="public">Públic</option>
+                                    </select>
+                                    <br><br>
+                                    <div class="form-group">
+                                        <input hidden type="password" class="form-control" name="codi" id="codi" placeholder="Codi...">
+                                    </div>
+                                    <br><br>
                                     <b>TAGS: </b>
                                     <br>
                                     <?php $query = $this->db->get('tags');

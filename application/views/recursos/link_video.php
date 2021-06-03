@@ -15,6 +15,7 @@
                                 <div style="margin-left: 71%;  margin-top: -7%">
                                     <button type="button" class="btn btn-outline-info" onclick="location.href='<?php echo base_url(); ?>recurs/formrecursos'"><i class="far fa-calendar-plus"></i>&nbsp;Menu Recursos</button>
                                 </div>
+                                <?php echo $this->session->flashdata('ok');  ?>
                                 <div class="text-center" style="margin-top: 2%;">
                                     <h1 class="h4 text-gray-900 mb-4"><i class="fab fa-youtube"></i>&nbsp;Link Video</h1>
                                 </div>
@@ -29,7 +30,7 @@
                                         language: 'ca',
                                     });
                                 </script>
-                                <form class="user" action="<?php echo base_url('recurs/formrecurs') ?>" enctype="multipart/form-data" method="POST">
+                                <form class="user" action="<?php echo base_url('recurs/link_video') ?>" enctype="multipart/form-data" method="POST">
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="link" id="link" placeholder="Link Video...">
                                     </div>
@@ -47,6 +48,36 @@
                                     </div>
                                     <textarea type="textarea" id="explicacio" name="explicacio" placeholder="Explicacio..."></textarea>
                                     <br>
+                                    <b>Categoria: </b>
+                                    <?php
+                                    echo "<select name='cat' id='cat'>";
+                                    echo "<hr>";
+                                    $controller->mostrar_categories($cat);
+                                    echo "</select>";
+                                    ?>
+                                    <br><br>
+                                    <script>
+                                        function access() {
+                                            var sel = document.getElementById("tipus_access");
+                                            if (sel.value == 'codi_invitacio') {
+                                                document.getElementById('codi').hidden = false;
+                                            } else {
+                                                document.getElementById('codi').hidden = true;
+                                            }
+                                        }
+                                    </script>
+                                    <b>Tipus d'access: </b>
+                                    <select name="tipus_access" id="tipus_access" onchange="access()">
+                                        <option value="grups_usuaris">Grup usuaris</option>
+                                        <option value="perfil_usuaris">Perfil usuaris</option>
+                                        <option value="codi_invitacio">Codi invitació</option>
+                                        <option value="public">Públic</option>
+                                    </select>
+                                    <br><br>
+                                    <div class="form-group">
+                                        <input hidden type="password" class="form-control" name="codi" id="codi" placeholder="Codi...">
+                                    </div>
+                                    <br><br>
                                     <b>TAGS: </b>
                                     <br>
                                     <?php $query = $this->db->get('tags');

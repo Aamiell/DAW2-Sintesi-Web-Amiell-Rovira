@@ -23,24 +23,18 @@ class Treecat_controller  extends CI_Controller
             $this->load->view('templates/footer', $data);
             $this->load->view('login/navbar-private', $data);
         }
-        
-
-
         $this->load->view('tree/index', $data);
     }
 
     public function mostrar_tree($categories)
     {
-        echo "<ol>";
-
+        echo "<ul>";
         foreach ($categories as $cat) {
-            echo "<li>" . $cat['nom'] . "</li>";
-
+            echo "<li><a href='" . base_url('recursos/' . $cat['id']) . "'>" . $cat['nom'] . "</li>";
             $fills = $this->treecat_model->get_fills($cat['id']);
-
             if (count($fills) > 0)
                 $this->mostrar_tree($fills);
         }
-        echo "</ol>";
+        echo "</ul>";
     }
 }
