@@ -38,9 +38,9 @@
                                     <br><br>
                                     <b>Arxius adjunts: </b>
                                     <br>
-                                    <input type="file" name="adjunts1" id="adjunts1" size="20" />
-                                    <input type="file" name="adjunts2" id="adjunts2" size="20" />
-                                    <input type="file" name="adjunts3" id="adjunts3" size="20" />
+                                    <input type="file" name="adjunts1" id="adjunts1" class="file-select">
+                                    <input type="file" name="adjunts2" id="adjunts2" size="20" class="btn btn-outline-info"/>
+                                    <input type="file" name="adjunts3" id="adjunts3" size="20" class="btn btn-outline-info"/>
                                     <br><br>
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="titol" id="titol" placeholder="Titol...">

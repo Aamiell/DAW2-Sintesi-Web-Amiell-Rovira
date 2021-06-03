@@ -109,7 +109,7 @@
                                     </div>
                                     <input hidden type="file" name="arxiu" id="arxiu" size="20" />
                                     <br><br>
-                                    <input hidden type="file" name="adjunts1" id="adjunts1" size="20" />
+                                    <input hidden type="file" name="adjunts1" id="adjunts1" size="20" class="btn btn "/>
                                     <input hidden type="file" name="adjunts2" id="adjunts2" size="20" />
                                     <input hidden type="file" name="adjunts3" id="adjunts3" size="20" />
                                     <br><br>
