@@ -172,6 +172,7 @@ class Recursos_model extends CI_Model
     {
         $this->db->where('id', $id);
         $this->db->delete('recursos');
+        return $this->db->affected_rows();
     }
 
     public function get_recursos()

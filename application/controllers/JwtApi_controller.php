@@ -45,6 +45,15 @@ class JwtApi_controller extends Jwt_Controller
 
         $this->response(null, API_Controller::HTTP_OK); // OK (200) being the HTTP response code
     }
+
+    public function recurs_options()
+    {
+        $this->output->set_header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Authorization");
+        $this->output->set_header("Access-Control-Allow-Methods: GET, DELETE, POST, OPTIONS");
+        $this->output->set_header("Access-Control-Allow-Origin: *");
+
+        $this->response(null, API_Controller::HTTP_OK); // OK (200) being the HTTP response code
+    }
     // PART PUBLICA PODREM DEMANAR TOTS ELS RECURSOS O UN SOL PER ID
     public function recursos_get()
     {
@@ -117,7 +126,7 @@ class JwtApi_controller extends Jwt_Controller
             //$slug = $this->delete('slug', true); // true for XSS Clean
             //Si el slug es diferent a null 
             if ($id != null) {
-                $comprovacio = $this->news_model->delete_recurs($id);
+                $comprovacio = $this->recursos_model->delete_recurs($id);
                 if ($comprovacio > 0) {
                     $message = [
                         'slug' => $id,
