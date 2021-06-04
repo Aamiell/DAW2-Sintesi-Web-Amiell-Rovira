@@ -156,6 +156,12 @@ class Recursos_model extends CI_Model
         return $query->row_array();
     }
 
+    public function get_fitxers_principals()
+    {
+        $query = $this->db->get_where('fitxers', array('fitxer_principal' => '1'));
+        return $query->row_array();
+    }
+
     public function get_arxius_adjunts($id)
     {
         $query = $this->db->get_where('fitxers', array('id_recurs' => $id, 'fitxer_principal' => '0'));
@@ -167,17 +173,4 @@ class Recursos_model extends CI_Model
         return $query->row_array();
     }
 
-
-    public function delete_recurs($id)
-    {
-        $this->db->where('id', $id);
-        $this->db->delete('recursos');
-        return $this->db->affected_rows();
-    }
-
-    public function get_recursos()
-    {
-        $query = $this->db->get('recursos');
-        return $query->result_array();
-    }
 }

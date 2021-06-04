@@ -119,3 +119,8 @@ $route['tags/tagsgrocery/(:any)/(:any)'] = 'grocery_controller/tagsgrocery/$1/$2
 $route['api_private/recursos/login'] = 'jwtapi_controller/login';
 $route['api_private/recursos'] = 'jwtapi_controller/recursos';
 $route['api_private/recurs/(:any)'] = 'jwtapi_controller/recurs/$1';
+
+$route['api_private/arxiu/recurs'] = 'jwtapi_controller/arxiup';
+$route['api_private/adjunts/recurs'] = 'jwtapi_controller/arxiuadj';
+
+$route['api_private/user'] = 'jwtapi_controller/infouser';

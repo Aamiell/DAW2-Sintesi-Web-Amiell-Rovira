@@ -176,19 +176,19 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><?php echo $recursos['descripcio']; ?></td>
+                    <td style="text-align: justify;"><?php echo $recursos['descripcio']; ?></td>
                 </tr>
             </tbody>
         </table>
         <table class="table text-center">
             <thead>
                 <tr>
-                    <th style="color: black;" class="bg-light" scope="col" colspan="4">Explicació</th>
+                    <th style="color: black; " class="bg-light" scope="col" colspan="4">Explicació</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><?php echo $recursos['explicacio']; ?></td>
+                    <td style="text-align: justify;"><?php echo $recursos['explicacio']; ?></td>
                 </tr>
             </tbody>
         </table>

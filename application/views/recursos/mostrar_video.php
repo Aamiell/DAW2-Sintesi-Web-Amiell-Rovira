@@ -34,7 +34,7 @@
             </thead>
             <tbody>
                     <tr>
-                        <td><?php echo $recursos['descripcio']; ?></td>
+                        <td style="text-align: justify;"><?php echo $recursos['descripcio']; ?></td>
                     </tr>
             </tbody>
             </table>
@@ -46,7 +46,7 @@
             </thead>
             <tbody>
                     <tr>
-                        <td><?php echo $recursos['explicacio']; ?></td>
+                        <td style="text-align: justify;"><?php echo $recursos['explicacio']; ?></td>
                     </tr>
             </tbody>
             </table>

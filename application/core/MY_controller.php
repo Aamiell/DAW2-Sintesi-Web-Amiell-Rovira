@@ -114,13 +114,17 @@ class Jwt_Controller extends API_Controller{
         {
             $user = $this->ion_auth->user()->row();
 
+            //$group= $this->ion_auth->in_group();
+
             $this->token_data->usr=$user->id;
 
             $jwt = $this->renewJWT(); // Get new Token and set to HTTP header
 
             $message = [
                 'status' => API_Controller::HTTP_OK,
-                'token' => $jwt,
+                'token' => $jwt, 
+                'user'=> $user,
+                //'grup' => $group,
                 'message' => 'User logged'
             ];
             $this->set_response($message, API_Controller::HTTP_OK); // 200
