@@ -47,7 +47,7 @@
                 <?php foreach ($adjunts as $adjunts_item) : ?>
                     <tr>
                         <td><?php echo $adjunts_item['nom_original']; ?></td>
-                        <td><a class="btn btn-outline-info" href="<?php echo base_url('recurs/arxius/' . $id_recurs  . '/adjunts/' . $adjunts_item['id']); ?>"><i class="fas fa-download"></i>&nbsp;Descargar</a></td>
+                        <td><a class="btn btn-outline-info" href="<?php echo base_url('recurs/public/arxius/' . $id_recurs  . '/adjunts/' . $adjunts_item['id']); ?>"><i class="fas fa-download"></i>&nbsp;Descargar</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

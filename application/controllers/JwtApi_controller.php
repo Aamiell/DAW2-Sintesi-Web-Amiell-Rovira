@@ -6,6 +6,7 @@ class JwtApi_controller extends Jwt_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('user_model');
         $this->load->model('recursos_model');
         $this->load->model('api_model');
         $this->load->library('form_validation');
@@ -70,6 +71,7 @@ class JwtApi_controller extends Jwt_Controller
 
     public function infouser_put()
     {
+        $this->output->set_header("Access-Control-Allow-Methods: GET, DELETE, POST, PUT, OPTIONS");
         $this->output->set_header("Access-Control-Allow-Origin: *");
         if ($this->auth_request()) {
 
@@ -171,6 +173,20 @@ class JwtApi_controller extends Jwt_Controller
             $this->set_response($message, $this->auth_code); // 400 / 401 / 419 / 500
         }
     }
+
+    // public function veure_arxiu_principal_($id_recurs)
+    // {
+    //     if ($this->auth_request()) {
+    //     $arxiu = $this->recursos_model->get_fitxer_principal($id_recurs);
+    //     force_download('../../uploads/' . $id_recurs . '/' . $arxiu['nom'], NULL);
+    //     }
+    // }
+
+    // public function veure_arxius_adjunts($id_recurs, $id_arxiu)
+    // {
+    //     $arxiu = $this->recursos_model->get_nom_arxius_adjunt($id_arxiu);
+    //     force_download('../../uploads/' . $id_recurs . '/adjunts/' . $arxiu['nom'], NULL);
+    // }
 
     public function arxiup_options()
     {

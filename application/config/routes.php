@@ -57,8 +57,9 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['home'] = "home_about_controller/home"; 
 $route['about'] = "home_about_controller/about"; 
-$route['home2'] = "home_about_controller/homecarrousel"; 
-// Routes del login
+// $route['home2'] = "home_about_controller/homecarrousel"; 
+
+// Routes del login, registre, logout, update, changepass i profile
 $route['login'] = "logins_controller/login";
 $route['login/registre'] = "logins_controller/registre"; 
 $route['login/logout'] = "users_controller/logout"; 
@@ -68,7 +69,6 @@ $route['login/changepass'] = "users_controller/changepass";
 $route['login/changepass_update'] = "users_controller/changepass_update";
 $route['login/profile'] = "users_controller/profile";
 
-
 //Routa per mostrar les categories
 $route['tree/category'] = 'treecat_controller/index'; 
 
@@ -76,29 +76,59 @@ $route['tree/category'] = 'treecat_controller/index';
 $route['users/usersgrocery'] = 'grocery_controller/usersgrocery';
 $route['users/usersgrocery/(:any)'] = 'grocery_controller/usersgrocery/$1';
 $route['users/usersgrocery/(:any)/(:any)'] = 'grocery_controller/usersgrocery/$1/$2';
-
 $route['users/users_groupgrocery'] = 'grocery_controller/users_groupgrocery';
 $route['users/users_groupgrocery/(:any)'] = 'grocery_controller/users_groupgrocery/$1';
 $route['users/users_groupgrocery/(:any)/(:any)'] = 'grocery_controller/users_groupgrocery/$1/$2';
 
 // Routes per crear els recursos
-//$route['recurs/formrecurs'] = 'recursos_controller/formrecurs';
-
 $route['recurs/formrecursos'] = 'recursos_controller/formrecursos';
 $route['recurs/infografia'] = 'recursos_controller/recurs_infografia';
 $route['recurs/pissarra'] = 'recursos_controller/recurs_pissarra';
 $route['recurs/video'] = 'recursos_controller/recurs_video';
 $route['recurs/link_video'] = 'recursos_controller/recurs_link';
-
+//Routes per veure els recursos
 $route['recursos/(:num)'] = "recursos_controller/recursos_categoria/$1";
 $route['recursos/mostrar_infografia/(:num)'] = "recursos_controller/mostrar_infografia/$1";
 $route['recursos/mostrar_video/(:num)'] = "recursos_controller/mostrar_video/$1";
 $route['recursos/mostrar_link_video/(:num)'] = "recursos_controller/mostrar_link_video/$1";
 $route['recursos/mostrar_pissarra/(:num)'] = "recursos_controller/mostrar_pissarra/$1";
-/*
-    recurs/2/arxiu23 
-    mostrar l'arxiu amb codi 23 de la carpeta de recursos del recurs numero 2
-*/
+//Routes la descarrega dels arxius prncipals i adjunts
+$route['recurs/(:num)'] = "recursos_controller/veure_arxiu_principal/$1";
+$route['recurs/arxius/(:num)/adjunts/(:num)'] = "recursos_controller/veure_arxius_adjunts/$1/$2";
+//Routes per mostrar els recursos (si no estas logged)
+$route['recursos/public/(:num)'] = "public_recursos_controller/precursos_categoria/$1";
+$route['recursos/public/mostrar_infografia/(:num)'] = "public_recursos_controller/pmostrar_infografia/$1";
+$route['recursos/public/mostrar_video/(:num)'] = "public_recursos_controller/pmostrar_video/$1";
+$route['recursos/public/mostrar_link_video/(:num)'] = "public_recursos_controller/pmostrar_link_video/$1";
+$route['recursos/public/mostrar_pissarra/(:num)'] = "public_recursos_controller/pmostrar_pissarra/$1";
+//Routes la descarrega dels arxius prncipals i adjunts (si no estas logged)
+$route['recurs/public/(:num)'] = "public_recursos_controller/pveure_arxiu_principal/$1";
+$route['recurs/public/arxius/(:num)/adjunts/(:num)'] = "public_recursos_controller/pveure_arxius_adjunts/$1/$2";
+
+
+$route['recursos/list_recursos_modificar'] = 'recursos_controller/llistar_recursos_usuari';
+$route['recursos/list_recursos'] = 'recursos_controller/llistar_recursos';
+
+//Modificar Infografia i arxius
+$route['recursos/modificar_infografia'] = 'recursos_controller/modificar_infografia';
+$route['recursos/modificar_infografia/(:any)'] = 'recursos_controller/modificar_infografia_form/$1';
+$route['recurs/infografia/borrar/(:num)'] = "recursos_controller/borrar_arxiu_principal_infografia/$1";
+$route['recurs/infografia/borrar/arxius/(:num)/adjunts/(:num)'] = "recursos_controller/borrar_arxius_adjunts_infografia/$1/$2";
+//Modificar video i arxius
+$route['recursos/modificar_video'] = 'recursos_controller/modificar_video';
+$route['recursos/modificar_video/(:any)'] = 'recursos_controller/modificar_video_form/$1';
+$route['recurs/video/borrar/(:num)'] = "recursos_controller/borrar_arxiu_principal_video/$1";
+$route['recurs/video/borrar/arxius/(:num)/adjunts/(:num)'] = "recursos_controller/borrar_arxius_adjunts_video/$1/$2";
+//Modificar link_video i arxius
+$route['recursos/modificar_link_video'] = 'recursos_controller/modificar_link_video';
+$route['recursos/modificar_link_video/(:any)'] = 'recursos_controller/modificar_link_video_form/$1';
+$route['recurs/link/borrar/arxius/(:num)/adjunts/(:num)'] = "recursos_controller/borrar_arxius_adjunts_link/$1/$2";
+//Modificar pissarra i arxius
+$route['recursos/modificar_pissarra'] = 'recursos_controller/modificar_pissarra';
+$route['recursos/modificar_pissarra/(:any)'] = 'recursos_controller/modificar_pissarra_form/$1';
+$route['recurs/pissarra/borrar/arxius/(:num)/adjunts/(:num)'] = "recursos_controller/borrar_arxius_adjunts_pissarra/$1/$2";
+
+
 $route['recurs/(:num)'] = "recursos_controller/veure_arxiu_principal/$1";
 $route['recurs/arxius/(:num)/adjunts/(:num)'] = "recursos_controller/veure_arxius_adjunts/$1/$2";
 
@@ -124,3 +154,8 @@ $route['api_private/arxiu/recurs'] = 'jwtapi_controller/arxiup';
 $route['api_private/adjunts/recurs'] = 'jwtapi_controller/arxiuadj';
 
 $route['api_private/user'] = 'jwtapi_controller/infouser';
+
+
+
+$route['api_private/imatge/(:any)'] = 'Downtoken_controller/imatgeprincipal/$1';
+$route['api_private/arxius/(:any)/adjunts/(:any)'] = 'Downtoken_controller/arxiusadjunts/$1/$2';

@@ -1,5 +1,5 @@
 <?php
-class Logins_controller extends CI_Controller //Private_controller
+class Logins_controller extends CI_Controller
 {
 
     public function __construct()

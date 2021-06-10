@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/sb-admin-2.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendor/fontawesome-free/css/all.min.css'); ?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/propiw3.css'); ?>">
 </head>
 
 <body id="page-top">
@@ -103,7 +104,8 @@
                         <h6 class="collapse-header">Rol: Professor</h6>
                         <a class="collapse-item" href="<?php echo base_url('login/profile'); ?>">Perfil</a>
                         <a class="collapse-item" href="<?php echo base_url('recurs/formrecursos'); ?>">Crear Recurs</a>
-                        <a class="collapse-item" href="<?php echo base_url('recurs/recursosgrocery'); ?>">Modificar Recurs</a>
+                        <a class="collapse-item" href="<?php echo base_url('recursos/list_recursos_modificar'); ?>">Modificar Recursos</a>
+                        <a class="collapse-item" href="<?php echo base_url('recurs/recursosgrocery'); ?>">Eliminar Recurs</a>
                         <!--<a class="collapse-item" href="register.html">Register</a>
                         <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
@@ -128,7 +130,8 @@
                         <a class="collapse-item" href="<?php echo base_url('recurs/formrecursos'); ?>">Crear Recurs</a>
                         <a class="collapse-item" href="<?php echo base_url('users/usersgrocery'); ?>">Gestioanar Usuaris</a>
                         <a class="collapse-item" href="<?php echo base_url('users/users_groupgrocery'); ?>">Gestioanar Grups</a>
-                        <a class="collapse-item" href="<?php echo base_url('recursos/recursosgrocery'); ?>">Gestionar Recursos</a>
+                        <a class="collapse-item" href="<?php echo base_url('recursos/list_recursos'); ?>">Modificar Recursos</a>
+                        <a class="collapse-item" href="<?php echo base_url('recursos/recursosgrocery'); ?>">Eliminar Recursos</a>
                         <a class="collapse-item" href="<?php echo base_url('tags/tagsgrocery'); ?>">Gestionar Tags</a>
                         <!--<a class="collapse-item" href="forgot-password.html">Forgot Password</a>
                         <div class="collapse-divider"></div>
@@ -218,10 +221,10 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="<?php echo base_url('login/profile'); ?>">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Perfil
                                 </a>
                                 <a class="dropdown-item" href="<?php echo base_url('login/settings'); ?>">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Editar Perfil
                                 </a>
                                 <a class="dropdown-item" href="<?php echo base_url('login/changepass'); ?>">
                                     <i class="fas fa-key fa-sm fa-fw mr-2 text-gray-400"></i> Canviar Contrasenya

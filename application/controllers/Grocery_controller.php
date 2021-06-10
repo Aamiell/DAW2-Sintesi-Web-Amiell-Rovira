@@ -9,11 +9,10 @@ class Grocery_controller extends Admin_controller
         $this->load->model('prova_model');
         $this->load->helper('url_helper');
         $this->load->library('session');
-        $this->load->library('ion_auth'); 
+        $this->load->library('ion_auth');
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->library('grocery_CRUD');
-        
     }
     public function usersgrocery()
     {
@@ -28,6 +27,11 @@ class Grocery_controller extends Admin_controller
         $crud->set_theme('tablestrap4');
         $crud->set_table('users');
         $crud->set_language("catalan");
+
+        // if ($crud->where('id', '1')) {
+        //     $crud->unset_edit();
+        //     $crud->unset_delete();
+        // }
 
         $crud->columns('first_name', 'last_name', 'username', 'email');
         $crud->fields('first_name', 'last_name', 'username', 'password', 'email', 'active');
@@ -57,6 +61,7 @@ class Grocery_controller extends Admin_controller
         $crud->change_field_type('active', 'invisible');
 
         $crud->unset_clone();
+
 
         $output = $crud->render();
         $this->_render_output($output);
@@ -107,10 +112,20 @@ class Grocery_controller extends Admin_controller
         $crud = new grocery_CRUD();
         $crud->set_language("catalan");
 
+        // $user = $this->ion_auth->user()->row();
+
+        // $crud->where('propietari', $user->username);
+
+        $crud->unset_clone();
+        $crud->unset_read();
+        $crud->unset_edit();
+        $crud->unset_add();
+
         $crud->set_theme('tablestrap4');
         $crud->set_table('recursos');
 
         $crud->columns('tipus_recurs', 'titol', 'propietari');
+        $crud->change_field_type('tipus_recurs', 'disabled');
 
         $crud->display_as('tipus_recurs', 'Tipus Recurs');
         $crud->display_as('titol', 'Titol');
@@ -118,14 +133,26 @@ class Grocery_controller extends Admin_controller
         $crud->display_as('email', 'Email');
         $crud->display_as('propietari', 'Propietari');
         $crud->change_field_type('id', 'invisible');
+        $crud->callback_before_delete(array($this, 'delete_file_before_delete'));
 
-        $crud->unset_clone();
         $output = $crud->render();
         $this->_render_output($output);
     }
-    protected function _render_output2($output = null)
+
+    public function delete_file_before_delete($primary_key)
     {
-        $this->load->view('grocery/groceryrecurs', (array)$output);
+        $query = $this->db->get_where('fitxers', array('id_recurs' => $primary_key));
+        $files = $query->result_array();
+
+        foreach ($files as $file) {
+            if ($file['fitxer_principal'] == '1') {
+                $principal = "../../uploads/" . $primary_key . '/' . $file['nom'];
+                unlink($principal);
+            } else {
+                $adjunts = "../../uploads/" . $primary_key . '/adjunts/' . $file['nom'];
+                unlink($adjunts);
+            }
+        }
     }
 
     public function tagsgrocery()
@@ -138,7 +165,7 @@ class Grocery_controller extends Admin_controller
         $this->load->view('login/navbar-private', $data);
         $crud = new grocery_CRUD();
         $crud->set_language("catalan");
-        
+
 
         $crud->set_theme('tablestrap4');
         $crud->set_table('tags');
@@ -153,5 +180,4 @@ class Grocery_controller extends Admin_controller
         $output = $crud->render();
         $this->_render_output($output);
     }
-
 }

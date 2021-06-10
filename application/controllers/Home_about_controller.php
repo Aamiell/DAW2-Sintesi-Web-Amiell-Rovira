@@ -44,7 +44,4 @@ class Home_about_controller extends CI_Controller
             $this->load->view('pages/about');
         }
     }
-    public function homecarrousel() {
-        $this->load->view('pages/home2');
-    }
 }

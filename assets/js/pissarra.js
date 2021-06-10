@@ -23,6 +23,7 @@ class PhotoCanvas {
         this.FormaCercle = this.FormaCercle.bind(this);
         this.FormaPintarCercle = this.FormaPintarCercle.bind(this);
         this.borrardibuix = this.borrardibuix.bind(this);
+        this.setImage = this.setImage.bind(this);
 
         // creeem el canvas y els tres botons y el dos inputs
         this.canvas = document.createElement("canvas");
@@ -82,6 +83,13 @@ class PhotoCanvas {
         container.appendChild(selgruix); // afegim el botó a la jerarquia d'objectes
         container.appendChild(selcolor); // afegim el botó a la jerarquia d'objectes
         container.appendChild(btborrar); // afegim el botó a la jerarquia d'objectes
+    }
+
+    setImage(img) {
+        this.ctx = this.canvas.getContext("2d");
+        if (this.ctx) {
+            this.ctx.drawImage(img, 0, 0);
+        }
     }
 
     crearcanvas() {

@@ -25,7 +25,7 @@ include "navbar-public.php"; ?>
                         <div class="col-lg-7">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Crear conte d'usuari</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Crea un compte d'usuari</h1>
                                 </div>
                                 <form class="user" action="<?php echo base_url('login/registre') ?>" method="POST">
                                     <div class="form-group row">

@@ -161,13 +161,6 @@
                 </tr>
             </tbody>
         </table>
-        <!-- <h5 style="font-weight: 900;" class="card-title"><?php echo $recursos['titol']; ?></h5> -->
-        <!-- <b class="card-subtitle mb-2 text-muted">Descripció</b>
-        <p class="card-text"><?php echo $recursos['descripcio']; ?></p> -->
-        <!-- <b class="card-subtitle mb-2 text-muted">Explicació</b>
-        <p class="card-text"><?php echo $recursos['explicacio']; ?></p> -->
-        <!-- <b class="card-subtitle mb-2 text-muted">Arxius Adjunts</b> -->
-        <!-- <ul class="list-group list-group-flush" style="width: 50%;"> -->
         <table class="table text-center">
             <thead>
                 <tr>
@@ -182,7 +175,7 @@
                 <?php foreach ($adjunts as $adjunts_item) : ?>
                     <tr>
                         <td><?php echo $adjunts_item['nom_original']; ?></td>
-                        <td><a class="btn btn-outline-info" href="<?php echo base_url('recurs/arxius/' . $id_recurs  . '/adjunts/' . $adjunts_item['id']); ?>"><i class="fas fa-download"></i>&nbsp;Descargar</a></td>
+                        <td><a class="btn btn-outline-info" href="<?php echo base_url('recurs/public/arxius/' . $id_recurs  . '/adjunts/' . $adjunts_item['id']); ?>"><i class="fas fa-download"></i>&nbsp;Descargar</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

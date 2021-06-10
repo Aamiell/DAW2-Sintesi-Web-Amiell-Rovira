@@ -7,6 +7,7 @@ class Treecat_controller  extends CI_Controller
     {
         parent::__construct();
         $this->load->model('treecat_model');
+        $this->load->library('ion_auth');
     }
 
 
@@ -28,13 +29,24 @@ class Treecat_controller  extends CI_Controller
 
     public function mostrar_tree($categories)
     {
-        echo "<ul>";
-        foreach ($categories as $cat) {
-            echo "<li><a href='" . base_url('recursos/' . $cat['id']) . "'>" . $cat['nom'] . "</li>";
-            $fills = $this->treecat_model->get_fills($cat['id']);
-            if (count($fills) > 0)
-                $this->mostrar_tree($fills);
+        if ((!$this->ion_auth->in_group("profe") && (!$this->ion_auth->in_group("admin")))) {
+            echo "<ul>";
+            foreach ($categories as $cat) {
+                echo "<li><a href='" . base_url('recursos/public/' . $cat['id']) . "'>" . $cat['nom'] . "</li>";
+                $fills = $this->treecat_model->get_fills($cat['id']);
+                if (count($fills) > 0)
+                    $this->mostrar_tree($fills);
+            }
+            echo "</ul>";
+        } else {
+            echo "<ul>";
+            foreach ($categories as $cat) {
+                echo "<li><a href='" . base_url('recursos/' . $cat['id']) . "'>" . $cat['nom'] . "</li>";
+                $fills = $this->treecat_model->get_fills($cat['id']);
+                if (count($fills) > 0)
+                    $this->mostrar_tree($fills);
+            }
+            echo "</ul>";
         }
-        echo "</ul>";
     }
 }

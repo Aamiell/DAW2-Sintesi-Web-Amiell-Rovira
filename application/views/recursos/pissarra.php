@@ -15,6 +15,7 @@
                                 <div style="margin-left: 71%;  margin-top: -7%">
                                     <button type="button" class="btn btn-outline-info" onclick="location.href='<?php echo base_url(); ?>recurs/formrecursos'"><i class="far fa-calendar-plus"></i>&nbsp;Menu Recursos</button>
                                 </div>
+                                <?php echo $this->session->flashdata('ok');  ?>
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4"><i class="fas fa-chalkboard"></i>&nbsp;Pissarra</h1>
                                 </div>
@@ -32,15 +33,24 @@
                                 <form class="user" action="<?php echo base_url('recurs/pissarra') ?>" enctype="multipart/form-data" method="POST">
                                     <script src="<?php echo base_url('assets/js/pissarra.js'); ?>"></script>
                                     <div id="cuadrediv"></div>
+
                                     <script>
                                         var canvas = new PhotoCanvas("cuadrediv");
+                                        function saveCanvas() {
+                                            var strData = document.getElementById("divcanvas").toDataURL().replace("data:image/png;base64,", "");
+                                            //alert(strData);
+                                            document.getElementById("pissarra").value = strData;
+                                        }
                                     </script>
+                                    
+                                    <input type="hidden" id='pissarra' name="pissarra" value="">
+
                                     <br><br>
                                     <b>Arxius adjunts: </b>
                                     <br>
                                     <input type="file" name="adjunts1" id="adjunts1" class="file-select">
-                                    <input type="file" name="adjunts2" id="adjunts2" size="20" class="btn btn-outline-info"/>
-                                    <input type="file" name="adjunts3" id="adjunts3" size="20" class="btn btn-outline-info"/>
+                                    <input type="file" name="adjunts3" id="adjunts3" size="20" />
+                                    <input type="file" name="adjunts2" id="adjunts2" size="20" />
                                     <br><br>
                                     <div class="form-group">
                                         <input type="text" class="form-control" name="titol" id="titol" placeholder="Titol...">
@@ -86,7 +96,7 @@
                                     foreach ($query->result() as $row) { ?>
                                         <input type="checkbox" id="tag" name="tag[]" value="<?php echo $row->nom; ?>"> <label for="tag" id="taglabel"> <?php echo $row->nom; ?></label><br>
                                     <?php } ?>
-                                    <input id="boto" name="boto" type="submit" class="btn btn-primary btn-user btn-block" value="Afegir Recurs">
+                                    <input id="boto" name="boto" type="submit" onclick="saveCanvas()" class="btn btn-primary btn-user btn-block" value="Afegir Recurs">
                                 </form>
                                 <hr>
                                 <?php
